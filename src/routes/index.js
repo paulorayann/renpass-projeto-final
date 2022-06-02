@@ -7,9 +7,9 @@ module.exports = (server) => {
         next()
     })
 
-    server.use((req, res, next)=>{
-        person(server, new Router())
-        next()
-    })
+    // server.use((req, res, next)=>{
+    //     person(server, new Router())
+    //     next()
+    // })
 
 }
