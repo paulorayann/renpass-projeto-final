@@ -24,7 +24,9 @@ const CarSchema = new mongoose.Schema ({
     passengersQtd: {
         type: Number
     }
-})
+},
+{timestamps: false, versionKey: false}
+)
 
 const Car = mongoose.model('Car', CarSchema)
 module.exports = Car
