@@ -28,6 +28,23 @@ class PersonController {
             return res.status(400).json(error)
         }
     }
+    async update(req, res) {
+        try {
+            const result =  await PersonService.updatePerson(req.params.id, req.body)
+            return res.status(200).json(result)
+        } catch (error) {
+            return res.status(400).json(error)
+        }
+    }
+
+    async delete(req, res) {
+        try {
+            const result = await PersonService.deletePerson(req.params.id)
+            return res.status(200).json('success')
+        } catch (error) {
+            return res.status(400).json(error)
+        }
+    }
     
 }
 
