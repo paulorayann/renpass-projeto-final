@@ -22,7 +22,7 @@ const CarSchema = new mongoose.Schema ({
         type: String
     }],
     passengersQtd: {
-        type: number
+        type: Number
     }
 })
 
