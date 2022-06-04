@@ -14,7 +14,7 @@ class AuthService {
         if (!validPassword) {
             throw new Error('Invalid password');
         }
-
+        person.password = undefined;
         return { person };
     }
 }
