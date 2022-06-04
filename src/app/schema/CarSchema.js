@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const uniqueArrayPlugin = require('mongoose-unique-array');
 
 const CarSchema = new mongoose.Schema(
     {
@@ -20,7 +21,10 @@ const CarSchema = new mongoose.Schema(
         },
         accessories: [
             {
-                type: Array
+                description: {
+                    type: String,
+                    unique: true
+                }
             }
         ],
         passengersQtd: {
@@ -30,5 +34,6 @@ const CarSchema = new mongoose.Schema(
     { timestamps: false, versionKey: false }
 );
 
+CarSchema.plugin(uniqueArrayPlugin);
 const Car = mongoose.model('Car', CarSchema);
 module.exports = Car;
