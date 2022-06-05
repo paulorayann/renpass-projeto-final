@@ -27,6 +27,7 @@
     "moment": "^2.29.3",
     "mongoose": "^6.3.5",
     "mongoose-paginate-v2": "^1.6.3",
-    "mongoose-unique-array": "^0.4.2"
+    "mongoose-unique-array": "^0.4.2",
+    "uuid": "^8.3.2"
   }
 }
