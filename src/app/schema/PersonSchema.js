@@ -10,7 +10,8 @@ const PersonSchema = new mongoose.Schema(
         },
         cpf: {
             type: String,
-            required: true
+            required: true,
+            unique: true
         },
         birthday: {
             type: Date,
