@@ -1,7 +1,7 @@
 const Joi = require('joi').extend(require('@joi/date'));
 module.exports = async (req, res, next) => {
     try {
-        const schema = Joi.object({
+        const car = Joi.object({
             model: Joi.string().trim().required(),
 
             type: Joi.string().trim().required(),
@@ -27,7 +27,7 @@ module.exports = async (req, res, next) => {
             passengersQtd: Joi.number().integer().min(2).required()
         });
 
-        const { error } = await schema.validate(req.body, {
+        const { error } = await car.validate(req.body, {
             abortEarly: false,
             allowUnknown: false
         });

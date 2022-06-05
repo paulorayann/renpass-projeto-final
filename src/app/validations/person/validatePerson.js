@@ -5,7 +5,7 @@ const { cpfValid } = require('../../utils/regex');
 
 module.exports = async (req, res, next) => {
     try {
-        const schema = Joi.object({
+        const person = Joi.object({
             name: Joi.string().trim().required(),
 
             cpf: Joi.string()
@@ -30,7 +30,7 @@ module.exports = async (req, res, next) => {
             canDrive: Joi.string().trim().valid('yes', 'no').required()
         });
 
-        const { error } = await schema.validate(req.body, {
+        const { error } = await person.validate(req.body, {
             abortEarly: true,
             allowUnknown: false
         });
@@ -38,11 +38,7 @@ module.exports = async (req, res, next) => {
         if (error)
             throw {
                 message: 'Bad Request',
-                details: [
-                    {
-                        message: error.message
-                    }
-                ]
+                details: [{ message: error.message }]
             };
         if (!cpfValidation(req.body.cpf)) {
             throw {
