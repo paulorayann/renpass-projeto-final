@@ -24,7 +24,7 @@ const CarSchema = new mongoose.Schema(
             {
                 description: {
                     type: String,
-                    unique: true
+                    required: true
                 }
             }
         ],

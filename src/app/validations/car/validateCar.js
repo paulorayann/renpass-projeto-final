@@ -16,6 +16,7 @@ module.exports = async (req, res, next) => {
 
             accessories: Joi.array()
                 .min(1)
+                .unique()
                 .items(
                     Joi.object({
                         description: Joi.string().trim().required()
