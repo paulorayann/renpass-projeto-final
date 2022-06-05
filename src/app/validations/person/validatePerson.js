@@ -20,7 +20,6 @@ module.exports = async (req, res, next) => {
                 .required()
                 .format('DD/MM/YYYY')
                 .max('now')
-                // eslint-disable-next-line consistent-return
                 .custom((value, help) => {
                     if (ageValidation(new Date(value)) === false) {
                         return help.message('User must be at least 18');
