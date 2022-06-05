@@ -1,6 +1,7 @@
 const PersonRepository = require('../repository/PersonRepository');
 const bcrypt = require('bcryptjs');
-const Person = require('../schema/PersonSchema');
+const jwt = require('jsonwebtoken');
+const authConfig = require('../../config/auth.json');
 
 class AuthService {
     async auth(email, password) {
@@ -15,7 +16,12 @@ class AuthService {
             throw new Error('Invalid password');
         }
         person.password = undefined;
-        return { person };
+
+        const token = jwt.sign({ id: person.id }, authConfig.secret, {
+            expiresIn: 86400
+        });
+
+        return { token, email: person.email, canDrive: person.canDrive };
     }
 }
 
