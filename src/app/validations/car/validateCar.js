@@ -8,6 +8,8 @@ module.exports = async (req, res, next) => {
 
             brand: Joi.string().trim().required(),
 
+            color: Joi.string().trim().required(),
+
             year: Joi.date()
                 .format('YYYY')
                 .min('1950-01-01')
