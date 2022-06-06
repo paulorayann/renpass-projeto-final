@@ -1,38 +1,39 @@
-/* eslint-disable no-unused-vars */
-const CarService = require('../services/CarService');
+const PersonService = require('../services/PersonService');
 
-class CarController {
+class PersonController {
     async create(req, res) {
         try {
-            const result = await CarService.create(req.body);
+            const result = await PersonService.create(req.body);
             return res.status(201).json(result);
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(400).json(error);
         }
     }
 
     async list(req, res) {
         const payload = req.query;
         try {
-            const result = await CarService.list(payload);
+            const result = await PersonService.list(payload);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(400).json(error);
         }
     }
 
     async getById(req, res) {
         try {
-            const result = await CarService.getById(req.params.id);
+            const result = await PersonService.getById(req.params.id);
             return res.status(200).json(result);
         } catch (error) {
             return res.status(error.errorStatus).json(error);
         }
     }
-
     async update(req, res) {
         try {
-            const result = await CarService.updateCar(req.params.id, req.body);
+            const result = await PersonService.updatePerson(
+                req.params.id,
+                req.body
+            );
             return res.status(200).json(result);
         } catch (error) {
             return res.status(error.errorStatus).json(error);
@@ -41,12 +42,12 @@ class CarController {
 
     async delete(req, res) {
         try {
-            await CarService.deleteCar(req.params.id);
-            return res.status(204).end();
+            const result = await PersonService.deletePerson(req.params.id);
+            return res.status(200).json('success');
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(400).json(error);
         }
     }
 }
 
-module.exports = new CarController();
+module.exports = new PersonController();

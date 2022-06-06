@@ -1,30 +1,45 @@
-const mongoose = require('mongoose')
+const mongoose = require('mongoose');
+const uniqueArrayPlugin = require('mongoose-unique-array');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
-const CarSchema = new mongoose.Schema ({
+const CarSchema = new mongoose.Schema(
+    {
+        model: {
+            type: String,
+            required: true
+        },
+        type: {
+            type: String,
+            required: true
+        },
+        brand: {
+            type: String,
+            required: true
+        },
+        year: {
+            type: String,
+            required: true
+        },
+        accessories: [
+            {
+                description: {
+                    type: String,
+                    required: true
+                },
+                _id: false
+            }
+        ],
+        passengersQtd: {
+            type: Number
+        }
+    },
+    { timestamps: false, versionKey: false }
+);
 
-    model: {
-        type: String,
-        required: true
-    },
-    type: {
-        type: String,
-        required: true
-    },
-    brand: {
-        type: String,
-        required: true
-    },
-    year: {
-        type: String,
-        required: true
-    },
-    accessories: [{
-        type: Array
-    }],
-    passengersQtd: {
-        type: Number
-    }
-})
+CarSchema.plugin(mongoosePaginate);
+CarSchema.plugin(uniqueArrayPlugin);
 
-const Car = mongoose.model('Car', CarSchema)
-module.exports = Car
+const Car = mongoose.model('Car', CarSchema);
+Car.paginate().then({});
+
+module.exports = Car;
