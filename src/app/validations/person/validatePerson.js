@@ -21,7 +21,7 @@ module.exports = async (req, res, next) => {
                 .format('DD/MM/YYYY')
                 .max('now')
                 .custom((value, help) => {
-                    if (ageValidation(new Date(value)) === false) {
+                    if (ageValidation(value) === false) {
                         return help.message('User must be at least 18');
                     }
                 }),
