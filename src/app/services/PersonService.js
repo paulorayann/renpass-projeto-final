@@ -1,6 +1,5 @@
 const PersonRepository = require('../repository/PersonRepository');
 const NotFound = require('../errors/NotFound');
-const UnderAge = require('../errors/UnderAge');
 
 class PersonService {
     async create(payload) {
