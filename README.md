@@ -108,6 +108,7 @@ http://localhost:3000/api/v1/person/
 ```
 
 ...
+
 `Status Code: 201 Created`
 
 ```
@@ -123,6 +124,7 @@ http://localhost:3000/api/v1/person/
 ```
 
 ...
+
 `Status Code: 400 Bad Request`
 
 ```
@@ -147,6 +149,7 @@ http://localhost:3000/api/v1/person/
 ```
 
 ...
+
 `Status Code: 200 OK`
 
 ```
@@ -179,6 +182,7 @@ http://localhost:3000/api/v1/person/
 ```
 
 ...
+
 `Status Code: 400 Bad Request`
 
 ```
@@ -203,6 +207,7 @@ http://localhost:3000/api/v1/person/:id
 ```
 
 ...
+
 `Status Code: 200 OK`
 
 ```
@@ -219,6 +224,7 @@ http://localhost:3000/api/v1/person/:id
 ```
 
 ...
+
 `Status Code: 404 Not Found`
 
 ```
@@ -331,6 +337,7 @@ http://localhost:3000/api/v1/car/
 ```
 
 ...
+
 `Status Code: 201 Created`
 
 ```
@@ -354,6 +361,7 @@ http://localhost:3000/api/v1/car/
 ```
 
 ...
+
 `Status Code: 400 Bad Request`
 
 ```
@@ -378,6 +386,7 @@ http://localhost:3000/api/v1/car/
 ```
 
 ...
+
 `Status Code: 200 OK`
 
 ```
@@ -436,6 +445,7 @@ http://localhost:3000/api/v1/car/:id
 ```
 
 ...
+
 `Status Code: 200 OK`
 
 ```
@@ -459,6 +469,7 @@ http://localhost:3000/api/v1/car/:id
 ```
 
 ...
+
 `Status Code: 404 Not Found`
 
 ```
@@ -566,6 +577,7 @@ http://localhost:3000/api/v1/authenticate
 ```
 
 ...
+
 `Status Code: 201 Created`
 
 ```
@@ -577,6 +589,7 @@ http://localhost:3000/api/v1/authenticate
 ```
 
 ...
+
 `Status Code: 404 Bad Request`
 
 ```
