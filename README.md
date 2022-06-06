@@ -1,7 +1,7 @@
 <h1 align="center">Final Project - Renpass.UOL</h1>
 
 <h6 align="center">
-  Compasso.UOL entered in a new branch of the market, Renpass.UOL. A luxury and semi-luxury car rental segment. This API will be reponsible for some endpoints of cars and people.
+  Compasso.UOL entered in a new branch of the market, Renpass.UOL. A luxury and semi-luxury car rental segment. This REST API will be responsible for some endpoints of cars and person.
 </h6>
 <p align="center">
  <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
