@@ -81,6 +81,10 @@ DB_COLLECTION = collection_example
 ```
 npm run dev
 ```
+<br>
+
+> #### You can use the [demo.md](demo.md) file in the project root directory to assist you in the population of Person, Car and Authorization.
+
 
 ...
 
