@@ -19,7 +19,7 @@ module.exports = async (req, res, next) => {
                         description: Joi.string().trim()
                     })
                 ),
-            passengersQtd: Joi.number().integer().min(2)
+            passengersQtd: Joi.number().integer().min(2).max(5)
         });
 
         const { error } = await car.validate(req.body, {

@@ -26,7 +26,7 @@ module.exports = async (req, res, next) => {
                 )
                 .required(),
 
-            passengersQtd: Joi.number().integer().min(2).required()
+            passengersQtd: Joi.number().integer().min(2).max(5).required()
         });
 
         const { error } = await car.validate(req.body, {
