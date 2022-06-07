@@ -18,7 +18,7 @@ class AuthService {
         person.password = undefined;
 
         const token = jwt.sign({ id: person.id }, authConfig.secret, {
-            expiresIn: 86400
+            expiresIn: 300
         });
 
         return { token, email: person.email, canDrive: person.canDrive };
