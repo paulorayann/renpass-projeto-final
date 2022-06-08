@@ -22,7 +22,7 @@ class PersonService {
 
     async updatePerson(id, body) {
         const result = await PersonRepository.updatePerson(id, body);
-        if (!result) throw new NotFound(id, body);
+        if (!result) throw new NotFound(id);
         return result;
     }
 
