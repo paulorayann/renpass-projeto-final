@@ -18,12 +18,13 @@ class CarRepository {
             hasPrevPage: false,
             hasNextPage: false
         };
+        const { limit, offset } = payload;
         const options = {
-            limit: 5,
-            offset: 1,
+            limit: parseInt(limit, 10) || 10,
+            offset: parseInt(offset, 0) || 1,
             customLabels: customLabels
         };
-        return CarSchema.paginate(payload, options, {});
+        return CarSchema.paginate({}, options);
     }
 
     async getById(payload) {
