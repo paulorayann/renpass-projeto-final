@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 const CarService = require('../services/CarService');
 
 class CarController {
