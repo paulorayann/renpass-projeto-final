@@ -9,7 +9,8 @@ class PersonRepository {
         return PersonSchema.create(payload);
     }
 
-    async list(payload) {
+    async list(query) {
+        const { limit, offset } = query;
         const customLabels = {
             totalDocs: 'total',
             docs: 'Person',
@@ -22,13 +23,12 @@ class PersonRepository {
             hasPrevPage: false,
             hasNextPage: false
         };
-        const { limit, offset } = payload;
         const options = {
             limit: parseInt(limit, 10) || 10,
             offset: parseInt(offset, 0) || 1,
             customLabels: customLabels
         };
-        return PersonSchema.paginate({}, options);
+        return PersonSchema.paginate(query, options, {});
     }
 
     async getById(payload) {
