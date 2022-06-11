@@ -1,6 +1,7 @@
 const Joi = require('joi').extend(require('@joi/date'));
 const { cnpjValid } = require('../../utils/regex');
 const cnpjValidation = require('../../utils/cnpjValidation');
+const { cepValid } = require('../../utils/regex');
 module.exports = async (req, res, next) => {
     try {
         const rental = Joi.object({
@@ -20,7 +21,13 @@ module.exports = async (req, res, next) => {
                 .unique()
                 .items(
                     Joi.object({
-                        cep: Joi.string().trim().required(),
+                        cep: Joi.string()
+                            .trim()
+                            .regex(cepValid)
+                            .message(
+                                'The CEP field has an invalid format, please try XXXXX-XXX and use numbers only'
+                            )
+                            .required(),
                         number: Joi.string().trim().required(),
                         isFilial: Joi.boolean().required()
                     })
