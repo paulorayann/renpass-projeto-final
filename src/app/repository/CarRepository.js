@@ -40,7 +40,7 @@ class CarRepository {
         return CarSchema.findByIdAndDelete(payload);
     }
 
-    async updateCarAccessory(id, accessoryId, updatedAccessory) {
+    async updateCarAccessory(accessoryId, updatedAccessory) {
         return CarSchema.findOneAndUpdate(
             { 'accessories._id': accessoryId },
             {
