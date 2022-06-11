@@ -29,6 +29,15 @@ class CarService {
         if (!result) throw new NotFound(payload);
         return result;
     }
+
+    async updateCarAccessory(id, accessoryId, updatedAccessory) {
+        const result = await CarRepository.updateCarAccessory(
+            id,
+            accessoryId,
+            updatedAccessory
+        );
+        return result;
+    }
 }
 
 module.exports = new CarService();
