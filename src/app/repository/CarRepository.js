@@ -38,6 +38,20 @@ class CarRepository {
     async deleteCar(payload) {
         return CarSchema.findByIdAndDelete(payload);
     }
+
+    async updateCarAccessory(id, accessoryId, updatedAccessory) {
+        return CarSchema.findOneAndUpdate(
+            { 'accessories._id': accessoryId },
+            {
+                $pull: { accessories: req.params.accessoryId }
+            },
+            {
+                $set: {
+                    'description.$.accessories': updatedAccessory.description
+                }
+            }
+        );
+    }
 }
 
 module.exports = new CarRepository();
