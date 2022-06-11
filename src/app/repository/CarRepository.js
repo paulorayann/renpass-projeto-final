@@ -5,7 +5,8 @@ class CarRepository {
         return CarSchema.create(payload);
     }
 
-    async list(payload) {
+    async list(query) {
+        const { limit, offset } = query;
         const customLabels = {
             totalDocs: 'total',
             docs: 'Car',
@@ -18,13 +19,13 @@ class CarRepository {
             hasPrevPage: false,
             hasNextPage: false
         };
-        const { limit, offset } = payload;
+
         const options = {
             limit: parseInt(limit, 10) || 10,
             offset: parseInt(offset, 0) || 1,
             customLabels: customLabels
         };
-        return CarSchema.paginate({}, options);
+        return CarSchema.paginate(query, options, {});
     }
 
     async getById(payload) {
