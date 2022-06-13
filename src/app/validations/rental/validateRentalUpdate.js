@@ -7,34 +7,21 @@ module.exports = async (req, res, next) => {
         const rental = Joi.object({
             name: Joi.string().trim().min(2).required(),
 
-            cnpj: Joi.string()
-                .trim()
-                .regex(cnpjValid)
-                .message(
-                    'The CNPJ field has an invalid format, please try XX.XXX.XXX/XXXX-XX and use numbers only'
-                )
-                .required(),
+            cnpj: Joi.string().regex(cnpjValid).trim(),
 
-            activities: Joi.string().trim().required(),
+            activities: Joi.string().trim(),
 
             address: Joi.array()
                 .unique()
                 .items(
                     Joi.object({
-                        cep: Joi.string()
-                            .trim()
-                            .regex(cepValid)
-                            .message(
-                                'The CEP field has an invalid format, please try XXXXX-XXX and use numbers only'
-                            )
-                            .required(),
-                        number: Joi.string().trim().required(),
-                        city: Joi.string().min(1),
-                        state: Joi.string(),
-                        isFilial: Joi.boolean().required()
+                        cep: Joi.string().regex(cepValid).trim(),
+                        number: Joi.string().min(1).trim(),
+                        city: Joi.string().min(1).trim(),
+                        state: Joi.string().min(2).max(2).trim(),
+                        isFilial: Joi.boolean()
                     })
                 )
-                .required()
         });
 
         const { error } = await rental.validate(req.body, {
@@ -47,7 +34,8 @@ module.exports = async (req, res, next) => {
                 message: 'Bad Request',
                 details: [
                     {
-                        message: error.message
+                        message: error.message,
+                        description: error.description
                     }
                 ]
             };
@@ -60,6 +48,6 @@ module.exports = async (req, res, next) => {
 
         return next();
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json(error.message);
     }
 };
