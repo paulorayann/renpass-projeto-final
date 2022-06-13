@@ -1,4 +1,5 @@
 const mongoose = require('mongoose');
+const mongoosePaginate = require('mongoose-paginate-v2');
 
 const RentalSchema = new mongoose.Schema(
     {
@@ -29,10 +30,10 @@ const RentalSchema = new mongoose.Schema(
                     type: Boolean,
                     required: true
                 },
-                street: {
+                complement: {
                     type: String
                 },
-                complement: {
+                street: {
                     type: String
                 },
                 district: {
@@ -50,6 +51,6 @@ const RentalSchema = new mongoose.Schema(
     },
     { timestamps: false, versionKey: false }
 );
-
+RentalSchema.plugin(mongoosePaginate);
 const Rental = mongoose.model('Rental', RentalSchema);
 module.exports = Rental;
