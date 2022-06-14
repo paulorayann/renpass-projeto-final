@@ -6,21 +6,9 @@ const rental = require('./rental.router');
 
 module.exports = (server) => {
     server.use((req, res, next) => {
-        car(server, new Router());
-        next();
-    });
-
-    server.use((req, res, next) => {
         person(server, new Router());
-        next();
-    });
-
-    server.use((req, res, next) => {
+        car(server, new Router());
         auth(server, new Router());
-        next();
-    });
-
-    server.use((req, res, next) => {
         rental(server, new Router());
         next();
     });
