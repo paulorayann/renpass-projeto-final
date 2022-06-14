@@ -11,14 +11,7 @@ module.exports = async (req, res, next) => {
             color: Joi.string().trim(),
 
             year: Joi.date().format('YYYY').min('1950-01-01').max('2022-12-31'),
-            accessories: Joi.array()
-                .min(1)
-                .unique()
-                .items(
-                    Joi.object({
-                        description: Joi.string().trim()
-                    })
-                ),
+
             passengersQtd: Joi.number().integer().min(2).max(5)
         });
 
