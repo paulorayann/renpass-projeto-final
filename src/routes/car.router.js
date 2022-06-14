@@ -9,8 +9,7 @@ module.exports = (server, routes, prefix = '/api/v1/car') => {
     routes.patch('/:id', validateCarUpdate, CarController.update);
     routes.patch(
         '/:id/accessories/:accessoryId',
-        validateCarUpdate,
-        CarController.update
+        CarController.updateCarAccessory
     );
     routes.delete('/:id', CarController.delete);
 
