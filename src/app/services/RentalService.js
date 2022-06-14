@@ -32,7 +32,7 @@ class RentalService {
     }
     async updateRental(id, body) {
         const result = await RentalRepository.updateRental(id, body);
-        if (!result) throw new NotFound(id);
+        if (!result) throw new NotFound(id, body);
         return result;
     }
     async deleteRental(payload) {
