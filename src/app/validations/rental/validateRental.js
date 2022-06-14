@@ -2,6 +2,7 @@ const Joi = require('joi').extend(require('@joi/date'));
 const { cnpjValid } = require('../../utils/regex');
 const cnpjValidation = require('../../utils/cnpjValidation');
 const { cepValid } = require('../../utils/regex');
+
 module.exports = async (req, res, next) => {
     try {
         const rental = Joi.object({
@@ -15,7 +16,7 @@ module.exports = async (req, res, next) => {
                 )
                 .required(),
 
-            activities: Joi.string().trim().required(),
+            activities: Joi.string().trim().min(2).required(),
 
             address: Joi.array()
                 .unique()
@@ -38,8 +39,7 @@ module.exports = async (req, res, next) => {
         });
 
         const { error } = await rental.validate(req.body, {
-            abortEarly: false,
-            allowUnknown: false
+            abortEarly: true
         });
 
         if (error)
@@ -57,9 +57,11 @@ module.exports = async (req, res, next) => {
                 details: 'Invalid CNPJ'
             };
         }
-
         return next();
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({
+            description: error.details[0].message,
+            message: error.message
+        });
     }
 };
