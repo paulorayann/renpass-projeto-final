@@ -40,9 +40,7 @@ const CarSchema = new mongoose.Schema(
 );
 
 CarSchema.plugin(mongoosePaginate);
-CarSchema.plugin(uniqueArrayPlugin);
 
 const Car = mongoose.model('Car', CarSchema);
-Car.paginate().then({});
 
 module.exports = Car;
