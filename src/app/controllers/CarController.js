@@ -49,15 +49,23 @@ class CarController {
 
     async updateCarAccessory(req, res) {
         const { id, accessoryId } = req.params;
+        const updatedAccessory = req.body;
         try {
             const result = await CarService.updateCarAccessory(
                 id,
                 accessoryId,
-                req.body
+                updatedAccessory
             );
+            if (result === null) {
+                return res.status(404).json({ description: 'Car not found' });
+            }
+
             return res.status(200).json(result);
         } catch (error) {
-            res.status(404).json(error);
+            res.status(404).json({
+                message: error.message,
+                description: error.description
+            });
         }
     }
 }

@@ -40,18 +40,28 @@ class CarRepository {
         return CarSchema.findByIdAndDelete(payload);
     }
 
-    async updateCarAccessory(accessoryId, updatedAccessory) {
-        return CarSchema.findOneAndUpdate(
-            { 'accessories._id': accessoryId },
-            {
-                $pull: { accessories: req.params.accessoryId }
-            },
+    async updateCarAccessory(id, accessoryId, updatedAccessory) {
+        const result = await CarSchema.findOneAndUpdate(
+            { _id: id, 'accessories._id': accessoryId },
+            // {
+            //     $pull: {
+            //         accessories: {
+            //             description: {
+            //                 $eq: ''
+            //             }
+            //         }
+            //     }
+            // },
             {
                 $set: {
-                    'description.$.accessories': updatedAccessory.description
+                    'accessories.$.description': updatedAccessory.description
                 }
-            }
+            },
+
+            { returnDocument: 'after', new: true }
         );
+
+        return result;
     }
 }
 
