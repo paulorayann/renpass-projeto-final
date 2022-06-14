@@ -33,6 +33,7 @@
         "mongoose": "^6.3.5",
         "mongoose-paginate-v2": "^1.6.3",
         "mongoose-unique-array": "^0.4.2",
+        "swagger-ui-express": "^4.4.0",
         "uuid": "^8.3.2"
     }
 }
