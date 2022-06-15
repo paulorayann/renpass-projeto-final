@@ -271,6 +271,502 @@
                     }
                 }
             }
+        },
+        "/person/": {
+            "post": {
+                "summary": "Create person",
+                "description": "This route will be responsible for creating a person",
+                "tags": ["Person"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Person"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Person"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get all Person",
+                "description": "This route will be responsible for listing person",
+                "tags": ["Person"],
+                "parameters": [
+                    {
+                        "name": "name",
+                        "in": "query",
+                        "description": "Filter by name",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "cpf",
+                        "in": "query",
+                        "description": "Filter by cpf",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "birthday",
+                        "in": "query",
+                        "description": "Filter by birthday",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "email",
+                        "in": "query",
+                        "description": "Filter by email",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "password",
+                        "in": "query",
+                        "description": "Filter by password",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "canDrive",
+                        "in": "query",
+                        "description": "Filter by canDrive",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Person"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/person/{id}": {
+            "get": {
+                "summary": "Get Person by Id",
+                "description": "This route will be responsible for listing a Person by Id",
+                "tags": ["Person"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Filter by id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Person"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Person by Id",
+                "description": "This route will be responsible for updating a Person by Id",
+                "tags": ["Person"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Person",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Xuxa"
+                                    },
+                                    "cpf": {
+                                        "type": "string",
+                                        "example": "236.006.660-96"
+                                    },
+
+                                    "email": {
+                                        "type": "string",
+                                        "example": "xuxameneghel@email.com"
+                                    },
+                                    "password": {
+                                        "type": "string",
+                                        "example": "14435567"
+                                    },
+
+                                    "canDrive": {
+                                        "type": "number",
+                                        "example": "yes"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Person"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Person by Id",
+                "description": "This route will be responsible for deleting a Person by Id",
+                "tags": ["Person"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Delete by id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Person"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rental/": {
+            "post": {
+                "summary": "Create Rental",
+                "description": "This route will be responsible for creating a Rental",
+                "tags": ["Rental"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Rental"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Rental"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get all Rentals",
+                "description": "This route will be responsible for listing Rentals",
+                "tags": ["Rental"],
+                "parameters": [
+                    {
+                        "name": "cep",
+                        "in": "query",
+                        "description": "Filter by cep",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "number",
+                        "in": "query",
+                        "description": "Filter by cpf",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "isFilial",
+                        "in": "query",
+                        "description": "Filter by isFilial",
+                        "schema": {
+                            "type": "boolean"
+                        }
+                    },
+                    {
+                        "name": "complement",
+                        "in": "query",
+                        "description": "Filter by complement",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "street",
+                        "in": "query",
+                        "description": "Filter by street",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "district",
+                        "in": "query",
+                        "description": "Filter by district",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "city",
+                        "in": "query",
+                        "description": "Filter by city",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "state",
+                        "in": "query",
+                        "description": "Filter by state",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Rental"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rental/{id}": {
+            "get": {
+                "summary": "Get Rental by Id",
+                "description": "This route will be responsible for listing a Rental by Id",
+                "tags": ["Rental"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Filter by id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Rental"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Rental by Id",
+                "description": "This route will be responsible for updating a Rental by Id",
+                "tags": ["Rental"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Rental",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "name": {
+                                        "type": "string",
+                                        "example": "Nome genérico"
+                                    },
+                                    "cnpj": {
+                                        "type": "string",
+                                        "example": "11.145.530/0001-44"
+                                    },
+                                    "activities": {
+                                        "type": "string",
+                                        "example": "Aluguel e venda de carros"
+                                    },
+                                    "address": {
+                                        "type": "array",
+                                        "items": {
+                                            "type": "object",
+                                            "properties": {
+                                                "cep": {
+                                                    "type": "string",
+                                                    "example": "66640-677"
+                                                },
+                                                "number": {
+                                                    "type": "string",
+                                                    "example": "120"
+                                                },
+                                                "isFilial": {
+                                                    "type": "boolean",
+                                                    "example": true
+                                                }
+                                            }
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Rental"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Rental by Id",
+                "description": "This route will be responsible for deleting a Rental by Id",
+                "tags": ["Rental"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Delete by id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Rental"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
         }
     },
     "components": {
@@ -313,6 +809,9 @@
                     "passengersQtd": {
                         "type": "number",
                         "example": 5
+                    },
+                    "_id": {
+                        "type": "string"
                     }
                 }
             },
@@ -325,7 +824,7 @@
                     },
                     "cpf": {
                         "type": "string",
-                        "example": "624.272.170-85"
+                        "example": "077.199.870-80"
                     },
                     "birthday": {
                         "type": "string",
@@ -334,7 +833,7 @@
                     },
                     "email": {
                         "type": "string",
-                        "example": "paulo@gmail.com"
+                        "example": "paulorayann@gmail.com"
                     },
                     "password": {
                         "type": "string",
@@ -344,6 +843,45 @@
                         "type": "string",
                         "enum": ["yes", "no"],
                         "example": "yes"
+                    }
+                }
+            },
+            "Rental": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Nome genérico"
+                    },
+                    "cnpj": {
+                        "type": "string",
+                        "example": "97.004.461/0001-74"
+                    },
+                    "activities": {
+                        "type": "string",
+                        "example": "Aluguel de Carros E Gestão de Frotas"
+                    },
+                    "address": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "cep": {
+                                    "type": "string",
+                                    "example": "66640-677"
+                                },
+
+                                "number": {
+                                    "type": "string",
+                                    "example": "18"
+                                },
+
+                                "isFilial": {
+                                    "type": "boolean",
+                                    "example": true
+                                }
+                            }
+                        }
                     }
                 }
             }
