@@ -18,7 +18,7 @@ class RentalController {
             const result = await RentalService.list(req.query);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(error.errorStatus || 400).json(error);
         }
     }
 
@@ -27,7 +27,7 @@ class RentalController {
             const result = await RentalService.getById(req.params.id);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(error.errorStatus || 404).json(error);
         }
     }
 
@@ -39,7 +39,7 @@ class RentalController {
             );
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(error.errorStatus || 404).json(error);
         }
     }
 
@@ -48,7 +48,7 @@ class RentalController {
             await RentalService.deleteRental(req.params.id);
             return res.status(204).end();
         } catch (error) {
-            return res.status(error.errorStatus).json(error);
+            return res.status(error.errorStatus || 404).json(error);
         }
     }
 }
