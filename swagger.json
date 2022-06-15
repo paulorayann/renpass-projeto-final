@@ -239,6 +239,37 @@
                         }
                     }
                 }
+            },
+            "delete": {
+                "summary": "Delete car by Id",
+                "description": "This route will be responsible for deleting a car by Id",
+                "tags": ["Cars"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Delete by id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Car"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
             }
         }
     },
