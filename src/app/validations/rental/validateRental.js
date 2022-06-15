@@ -19,7 +19,6 @@ module.exports = async (req, res, next) => {
             activities: Joi.string().trim().min(2).required(),
 
             address: Joi.array()
-                .unique()
                 .items(
                     Joi.object({
                         cep: Joi.string()
@@ -30,8 +29,6 @@ module.exports = async (req, res, next) => {
                             )
                             .required(),
                         number: Joi.string().trim().required(),
-                        city: Joi.string().min(1),
-                        state: Joi.string(),
                         isFilial: Joi.boolean().required()
                     })
                 )
@@ -39,7 +36,7 @@ module.exports = async (req, res, next) => {
         });
 
         const { error } = await rental.validate(req.body, {
-            abortEarly: true
+            abortEarly: false
         });
 
         if (error)
@@ -54,7 +51,12 @@ module.exports = async (req, res, next) => {
         if (!cnpjValidation(req.body.cnpj)) {
             throw {
                 message: 'Bad Request',
-                details: 'Invalid CNPJ'
+                details: [
+                    {
+                        message: error.message,
+                        description: error.description
+                    }
+                ]
             };
         }
         return next();

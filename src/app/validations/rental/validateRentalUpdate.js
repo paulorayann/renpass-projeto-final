@@ -11,22 +11,16 @@ module.exports = async (req, res, next) => {
 
             activities: Joi.string().trim(),
 
-            address: Joi.array()
-                .unique()
-                .items(
-                    Joi.object({
-                        cep: Joi.string().regex(cepValid).trim(),
-                        number: Joi.string().min(1).trim(),
-                        city: Joi.string().min(1).trim(),
-                        state: Joi.string().min(2).max(2).trim(),
-                        isFilial: Joi.boolean()
-                    })
-                )
+            address: Joi.array().items(
+                Joi.object({
+                    number: Joi.string().min(1).trim(),
+                    isFilial: Joi.boolean()
+                })
+            )
         });
 
         const { error } = await rental.validate(req.body, {
-            abortEarly: false,
-            allowUnknown: false
+            abortEarly: false
         });
 
         if (error)
@@ -42,7 +36,12 @@ module.exports = async (req, res, next) => {
         if (!cnpjValidation(req.body.cnpj)) {
             throw {
                 message: 'Bad Request',
-                details: 'Invalid CNPJ'
+                details: [
+                    {
+                        message: error.message,
+                        description: error.description
+                    }
+                ]
             };
         }
 

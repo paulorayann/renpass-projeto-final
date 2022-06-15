@@ -16,8 +16,7 @@ module.exports = async (req, res, next) => {
         });
 
         const { error } = await car.validate(req.body, {
-            abortEarly: false,
-            allowUnknown: false
+            abortEarly: false
         });
 
         if (error)
@@ -25,7 +24,8 @@ module.exports = async (req, res, next) => {
                 message: 'Bad Request',
                 details: [
                     {
-                        message: error.message
+                        message: error.message,
+                        description: error.description
                     }
                 ]
             };

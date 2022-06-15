@@ -31,14 +31,18 @@ module.exports = async (req, res, next) => {
         });
 
         const { error } = await person.validate(req.body, {
-            abortEarly: true,
-            allowUnknown: false
+            abortEarly: false
         });
 
         if (error)
             throw {
                 message: 'Bad Request',
-                details: [{ message: error.message }]
+                details: [
+                    {
+                        message: error.message,
+                        description: error.description
+                    }
+                ]
             };
 
         return next();
