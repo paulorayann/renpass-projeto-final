@@ -6,7 +6,9 @@ class CarController {
             const result = await CarService.create(req.body);
             return res.status(201).json(result);
         } catch (error) {
-            return res.status(error.errorStatus || 400).json(error);
+            return res
+                .status(error.errorStatus || 400)
+                .json({ error, description: error.description });
         }
     }
 
@@ -16,7 +18,9 @@ class CarController {
             const result = await CarService.list(payload);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus || 400).json(error);
+            return res
+                .status(error.errorStatus || 400)
+                .json({ error, description: error.description });
         }
     }
 
@@ -25,7 +29,9 @@ class CarController {
             const result = await CarService.getById(req.params.id);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus || 404).json(error);
+            return res
+                .status(error.errorStatus || 404)
+                .json({ error, description: error.description });
         }
     }
 
@@ -34,7 +40,9 @@ class CarController {
             const result = await CarService.updateCar(req.params.id, req.body);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus || 404).json(error);
+            return res
+                .status(error.errorStatus || 404)
+                .json({ error, description: error.description });
         }
     }
 
@@ -43,7 +51,9 @@ class CarController {
             await CarService.deleteCar(req.params.id);
             return res.status(204).end();
         } catch (error) {
-            return res.status(error.errorStatus || 404).json(error);
+            return res
+                .status(error.errorStatus || 404)
+                .json({ error, description: error.description });
         }
     }
 
@@ -63,7 +73,7 @@ class CarController {
             return res.status(200).json(result);
         } catch (error) {
             res.status(404).json({
-                message: error.message,
+                error,
                 description: error.description
             });
         }

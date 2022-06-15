@@ -24,7 +24,9 @@ class PersonController {
             const result = await PersonService.getById(req.params.id);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus || 404).json(error);
+            return res
+                .status(error.errorStatus || 404)
+                .json({ error, description: error.description });
         }
     }
     async update(req, res) {
@@ -35,7 +37,9 @@ class PersonController {
             );
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(error.errorStatus || 404).json(error);
+            return res
+                .status(error.errorStatus || 404)
+                .json({ error, description: error.description });
         }
     }
 
@@ -44,7 +48,9 @@ class PersonController {
             const result = await PersonService.deletePerson(req.params.id);
             return res.status(200).json('success');
         } catch (error) {
-            return res.status(error.errorStatus || 404).json(error);
+            return res
+                .status(error.errorStatus || 404)
+                .json({ error, description: error.description });
         }
     }
 }
