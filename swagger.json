@@ -1,0 +1,221 @@
+{
+    "openapi": "3.0.0",
+    "info": {
+        "title": "Renpass.UOL",
+        "description": "Renpass.UOL API documentation",
+        "contact": {
+            "name": "Paulo Rayann",
+            "url": "https://github.com/paulorayann",
+            "email": "paulorpsena@gmail.com"
+        },
+        "version": "1.0.0"
+    },
+    "servers": [
+        {
+            "url": "http://localhost:3000/api/v1",
+            "description": "Renpass.UOL API"
+        }
+    ],
+    "paths": {
+        "/car": {
+            "post": {
+                "summary": "Post a car",
+                "description": "This route will be responsible for creating a new car",
+                "tags": ["Cars"],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "$ref": "#/components/schemas/Car"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Car"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get all cars",
+                "description": "This route will be responsible for listing all cars",
+                "tags": ["Cars"],
+                "parameters": [
+                    {
+                        "name": "model",
+                        "in": "query",
+                        "description": "Filter by model",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "type",
+                        "in": "query",
+                        "description": "Filter by type",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "brand",
+                        "in": "query",
+                        "description": "Filter by brand",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "color",
+                        "in": "query",
+                        "description": "Filter by color",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "year",
+                        "in": "query",
+                        "description": "Filter by year",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "passengersQtd",
+                        "in": "query",
+                        "description": "Filter by passengersQtd",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "limit",
+                        "in": "query",
+                        "description": "Limit the number of results",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "offset",
+                        "in": "query",
+                        "description": "Offset the results",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Car"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/car/{id}": {
+            "get": {
+                "summary": "Get car by Id",
+                "description": "This route will be responsible for listing a car by Id",
+                "tags": ["Cars"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Filter by id",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Car"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "components": {
+        "schemas": {
+            "Car": {
+                "type": "object",
+                "properties": {
+                    "model": {
+                        "type": "string",
+                        "example": "Gol"
+                    },
+                    "type": {
+                        "type": "string",
+                        "example": "SUV"
+                    },
+                    "brand": {
+                        "type": "string",
+                        "example": "Volkswagen"
+                    },
+                    "color": {
+                        "type": "string",
+                        "example": "Preto"
+                    },
+                    "year": {
+                        "type": "string",
+                        "example": "2020"
+                    },
+                    "accessories": {
+                        "type": "array",
+                        "items": {
+                            "type": "object",
+                            "properties": {
+                                "description": {
+                                    "type": "string",
+                                    "example": "4 portas"
+                                }
+                            }
+                        }
+                    },
+                    "passengersQtd": {
+                        "type": "number",
+                        "example": 5
+                    }
+                }
+            }
+        }
+    }
+}
