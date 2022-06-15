@@ -43,15 +43,7 @@ class CarRepository {
     async updateCarAccessory(id, accessoryId, updatedAccessory) {
         const result = await CarSchema.findOneAndUpdate(
             { _id: id, 'accessories._id': accessoryId },
-            // {
-            //     $pull: {
-            //         accessories: {
-            //             description: {
-            //                 $eq: ''
-            //             }
-            //         }
-            //     }
-            // },
+
             {
                 $set: {
                     'accessories.$.description': updatedAccessory.description
