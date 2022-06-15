@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uniqueArrayPlugin = require('mongoose-unique-array');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const CarSchema = new mongoose.Schema(
@@ -29,8 +28,7 @@ const CarSchema = new mongoose.Schema(
                 description: {
                     type: String,
                     required: true
-                },
-                _id: false
+                }
             }
         ],
         passengersQtd: {
@@ -41,9 +39,7 @@ const CarSchema = new mongoose.Schema(
 );
 
 CarSchema.plugin(mongoosePaginate);
-CarSchema.plugin(uniqueArrayPlugin);
 
 const Car = mongoose.model('Car', CarSchema);
-Car.paginate().then({});
 
 module.exports = Car;

@@ -30,8 +30,7 @@ module.exports = async (req, res, next) => {
         });
 
         const { error } = await car.validate(req.body, {
-            abortEarly: false,
-            allowUnknown: false
+            abortEarly: false
         });
 
         if (error)
@@ -39,13 +38,17 @@ module.exports = async (req, res, next) => {
                 message: 'Bad Request',
                 details: [
                     {
-                        message: error.message
+                        message: error.message,
+                        description: error.description
                     }
                 ]
             };
 
         return next();
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({
+            details: error.details,
+            message: error.message
+        });
     }
 };

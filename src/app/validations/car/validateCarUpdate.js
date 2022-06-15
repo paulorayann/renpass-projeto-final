@@ -11,20 +11,12 @@ module.exports = async (req, res, next) => {
             color: Joi.string().trim(),
 
             year: Joi.date().format('YYYY').min('1950-01-01').max('2022-12-31'),
-            accessories: Joi.array()
-                .min(1)
-                .unique()
-                .items(
-                    Joi.object({
-                        description: Joi.string().trim()
-                    })
-                ),
+
             passengersQtd: Joi.number().integer().min(2).max(5)
         });
 
         const { error } = await car.validate(req.body, {
-            abortEarly: false,
-            allowUnknown: false
+            abortEarly: false
         });
 
         if (error)
@@ -32,13 +24,17 @@ module.exports = async (req, res, next) => {
                 message: 'Bad Request',
                 details: [
                     {
-                        message: error.message
+                        message: error.message,
+                        description: error.description
                     }
                 ]
             };
 
         return next();
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({
+            details: error.details,
+            message: error.message
+        });
     }
 };

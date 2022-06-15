@@ -1,7 +1,7 @@
 <h1 align="center">Final Project - Renpass.UOL</h1>
 
 <h6 align="center">
-  Compasso.UOL entered in a new branch of the market, Renpass.UOL. A luxury and semi-luxury car rental segment. This REST API will be responsible for some endpoints of cars and person.
+  Compasso.UOL entered in a new branch of the market, Renpass.UOL. A luxury and semi-luxury car rental segment. This REST API will be responsible for some endpoints of cars, person, rentals and authentication.
 </h6>
 <p align="center">
  <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
@@ -27,6 +27,9 @@
 -   [mongoose-paginate-v2: v1.6.3](https://www.npmjs.com/package/mongoose-paginate-v2)
 -   [bcryptjs: v2.4.3](https://www.npmjs.com/package/bcryptjs)
 -   [jsonwebtoken": v8.5.1](https://www.npmjs.com/package/jsonwebtoken)
+-   [axios: v0.27.2](https://www.npmjs.com/package/axios)
+-   [swagger-ui-express: v4.4.0](https://www.npmjs.com/package/swagger-ui-express)
+-
 
 ### Node Version:
 
@@ -38,6 +41,14 @@ v14.17.0
 
 ```
 v6.14.13
+```
+
+...
+
+## Documentation ✍
+
+```
+The project has a Swagger Documentation that you can access using the route: (http://localhost:3000/api/v1/api-docs/).
 ```
 
 ...
@@ -81,10 +92,10 @@ DB_COLLECTION = collection_example
 ```
 npm run dev
 ```
+
 <br>
 
 > #### You can use the [demo.md](demo.md) file in the project root directory to assist you in the population of Person, Car and Authorization.
-
 
 ...
 
@@ -304,6 +315,56 @@ http://localhost:3000/api/v1/person/:id
     "message": "Id '629d234406e1aa26ad7b669b' not found"
 }
 ```
+
+...
+
+# 👨‍💻 Authenticate Endpoint:
+
+## Authenticate:
+
+`POST`
+
+```
+http://localhost:3000/api/v1/authenticate
+```
+
+### Body Example
+
+```
+{
+    "email": "email@email.com",
+    "password": "123456435464"
+}
+
+```
+
+...
+
+`Status Code: 201 Created`
+
+```
+{
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWQyYmRjMjA3Mjc4ODhiNzZlNmI4ZiIsImlhdCI6MTY1NDQ4NjU1OSwiZXhwIjoxNjU0NTcyOTU5fQ.ieh4BP2MeHOoIx912LP1UyM-09R5_A28SLf_mtuccJY",
+    "email": "email@email.com",
+    "canDrive": "yes"
+}
+```
+
+...
+
+`Status Code: 404 Bad Request`
+
+```
+{
+    "error": "Person not found"
+}
+```
+
+...
+
+## Bearer Authentication
+
+> ##### To use Cars Endpoints, you must add the `Authorization` header with the value `Bearer <token>` provided after the authentication.
 
 ...
 
@@ -560,22 +621,30 @@ http://localhost:3000/api/v1/car/:id
 
 ...
 
-# 👨‍💻 Authenticate Endpoint:
+# 💲 Rental Endpoints
 
-## Authenticate:
+## Create Rental
 
 `POST`
 
 ```
-http://localhost:3000/api/v1/authenticate
+http://localhost:3000/api/v1/rental/
 ```
 
 ### Body Example
 
 ```
 {
-    "email": "email@email.com",
-    "password": "123456435464"
+  "name": "Nome genérico",
+  "cnpj": "97.004.461/0001-74",
+  "activities": "Aluguel de Carros E Gestão de Frotas",
+  "address": [
+    {
+      "cep": "66640-677",
+      "number": "18",
+      "isFilial": true
+    }
+  ]
 }
 
 ```
@@ -586,23 +655,242 @@ http://localhost:3000/api/v1/authenticate
 
 ```
 {
-    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjYyOWQyYmRjMjA3Mjc4ODhiNzZlNmI4ZiIsImlhdCI6MTY1NDQ4NjU1OSwiZXhwIjoxNjU0NTcyOTU5fQ.ieh4BP2MeHOoIx912LP1UyM-09R5_A28SLf_mtuccJY",
-    "email": "email@email.com",
-    "canDrive": "yes"
+  "name": "Nome genérico",
+  "cnpj": "97.004.461/0001-74",
+  "activities": "Aluguel de Carros E Gestão de Frotas",
+  "address": [
+    {
+      "cep": "66640-677",
+      "number": "18",
+      "isFilial": true,
+      "complement": "",
+      "street": "Conjunto Augusto Montenegro III",
+      "district": "Mangueirão",
+      "city": "Belém",
+      "state": "PA"
+    }
+  ],
+  "_id": "62a9ef6465026a1dd82e3fc6"
 }
 ```
 
 ...
 
-`Status Code: 404 Bad Request`
+`Status Code: 400 Bad Request`
 
 ```
 {
-    "error": "Person not found"
+    "message": "Bad Request",
+    "details": [
+        {
+            "message": "error message of the request"
+        }
+    ]
 }
 ```
 
 ...
+
+## List All rental:
+
+`GET`
+
+```
+http://localhost:3000/api/v1/rental/
+```
+
+...
+
+`Status Code: 200 OK`
+
+```
+{
+    "Rentals": [
+        {
+      "_id": "62a7571083d4bcdf57efb5b0",
+      "name": "Rayanns",
+      "cnpj": "97.819.869/0001-02",
+      "activities": "Teste de Patch Update",
+      "address": [
+        {
+          "cep": "01001-000",
+          "number": "180",
+          "isFilial": true,
+          "complement": "lado ímpar",
+          "street": "Praça da Sé",
+          "district": "Sé",
+          "city": "São Paulo",
+          "state": "SP"
+        },
+        {
+          "cep": "66640-677",
+          "number": "180",
+          "isFilial": true,
+          "complement": "",
+          "street": "Conjunto Augusto Montenegro III",
+          "district": "Mangueirão",
+          "city": "Belém",
+          "state": "PA"
+        },
+        {
+      "_id": "62a7571083d4bcdf57efb5b0",
+      "name": "Rayanns",
+      "cnpj": "97.819.869/0001-02",
+      "activities": "Teste de Patch Update",
+      "address": [
+        {
+          "cep": "01001-000",
+          "number": "180",
+          "isFilial": true,
+          "complement": "lado ímpar",
+          "street": "Praça da Sé",
+          "district": "Sé",
+          "city": "São Paulo",
+          "state": "SP"
+        }
+      ]
+    }
+    },
+    ],
+    "total": 9,
+    "offset": 1,
+    "limit": 5,
+    "offsets": 2
+}
+```
+
+...
+
+## List rental by Id:
+
+`GET`
+
+```
+http://localhost:3000/api/v1/rental/:id
+```
+
+...
+
+`Status Code: 200 OK`
+
+```
+{
+  "_id": "62a7571083d4bcdf57efb5b0",
+  "name": "Rayanns",
+  "cnpj": "97.819.869/0001-02",
+  "activities": "Teste de Patch Update",
+  "address": [
+    {
+      "cep": "01001-000",
+      "number": "180",
+      "isFilial": true,
+      "complement": "lado ímpar",
+      "street": "Praça da Sé",
+      "district": "Sé",
+      "city": "São Paulo",
+      "state": "SP"
+    },
+    {
+      "cep": "66640-677",
+      "number": "180",
+      "isFilial": true,
+      "complement": "",
+      "street": "Conjunto Augusto Montenegro III",
+      "district": "Mangueirão",
+      "city": "Belém",
+      "state": "PA"
+    }
+  ]
+}
+```
+
+...
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "errorStatus": 404,
+    "name": "NotFound",
+    "message": "Id '629d234406e1aa26ad7b669b' not found"
+}
+```
+
+...
+
+## Update Rental
+
+`PATCH`
+
+```
+http://localhost:3000/api/v1/rental/:id
+```
+
+### Body Example
+
+```
+{
+  "name": "Nome genérico",
+  "cnpj": "85.456.880/0001-68",
+  "activities": "Aluguel e venda de carros",
+  "address": [
+    {
+      "number": "120",
+      "isFilial": true
+    }
+  ]
+}
+```
+
+`Status Code: 200 OK`
+
+```
+{
+  "_id": "62a7571083d4bcdf57efb5b0",
+  "name": "Nome genérico",
+  "cnpj": "08.111.247/0001-97",
+  "activities": "Aluguel e venda de carros",
+  "address": [
+    {
+      "number": "120",
+      "isFilial": true
+    }
+  ]
+}
+
+```
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "errorStatus": 404,
+    "name": "NotFound",
+    "message": "Id '629d234406e1aa26ad7b669b' not found"
+}
+```
+
+...
+
+## Delete Rental
+
+`DELETE`
+
+```
+http://localhost:3000/api/v1/rental/:id
+```
+
+`Status Code: 204 No Content`
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "errorStatus": 404,
+    "name": "NotFound",
+    "message": "Id '629d234406e1aa26ad7b669b' not found"
+}
+```
 
 ## Author
 

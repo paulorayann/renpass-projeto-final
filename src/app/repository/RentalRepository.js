@@ -1,19 +1,15 @@
-const PersonSchema = require('../schema/PersonSchema');
+const RentalSchema = require('../schema/RentalSchema');
+const axios = require('axios').default;
 
-class PersonRepository {
-    async auth(email) {
-        return PersonSchema.findOne({ email }).select('+password');
-    }
-
+class RentalRepository {
     async create(payload) {
-        return PersonSchema.create(payload);
+        return RentalSchema.create(payload);
     }
-
     async list(query) {
         const { limit, offset } = query;
         const customLabels = {
             totalDocs: 'total',
-            docs: 'Person',
+            docs: 'Rentals',
             page: 'offset',
             nextPage: false,
             prevPage: false,
@@ -28,20 +24,17 @@ class PersonRepository {
             offset: parseInt(offset, 0) || 1,
             customLabels: customLabels
         };
-        return PersonSchema.paginate(query, options, {});
+        return RentalSchema.paginate(query, options, {});
     }
-
     async getById(payload) {
-        return PersonSchema.findById(payload);
+        return RentalSchema.findById(payload);
     }
-
-    async updatePerson(id, body) {
-        return PersonSchema.findByIdAndUpdate(id, body);
+    async updateRental(id, body) {
+        return RentalSchema.findByIdAndUpdate(id, body);
     }
-
-    async deletePerson(payload) {
-        return PersonSchema.findByIdAndDelete(payload);
+    async deleteRental(payload) {
+        return RentalSchema.findByIdAndDelete(payload);
     }
 }
 
-module.exports = new PersonRepository();
+module.exports = new RentalRepository();

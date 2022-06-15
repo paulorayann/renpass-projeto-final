@@ -31,8 +31,7 @@ module.exports = async (req, res, next) => {
         });
 
         const { error } = await person.validate(req.body, {
-            abortEarly: true,
-            allowUnknown: false
+            abortEarly: false
         });
 
         if (error)
@@ -43,12 +42,20 @@ module.exports = async (req, res, next) => {
         if (!cpfValidation(req.body.cpf)) {
             throw {
                 message: 'Bad Request',
-                details: 'Invalid CPF'
+                details: [
+                    {
+                        message: error.message,
+                        description: error.description
+                    }
+                ]
             };
         }
 
         return next();
     } catch (error) {
-        return res.status(400).json(error);
+        return res.status(400).json({
+            details: error.details,
+            message: error.message
+        });
     }
 };
