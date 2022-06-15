@@ -1,5 +1,4 @@
 const mongoose = require('mongoose');
-const uniqueArrayPlugin = require('mongoose-unique-array');
 const mongoosePaginate = require('mongoose-paginate-v2');
 
 const CarSchema = new mongoose.Schema(
