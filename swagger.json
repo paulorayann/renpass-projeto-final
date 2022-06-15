@@ -315,6 +315,37 @@
                         "example": 5
                     }
                 }
+            },
+            "Person": {
+                "type": "object",
+                "properties": {
+                    "name": {
+                        "type": "string",
+                        "example": "Paulo Rayann"
+                    },
+                    "cpf": {
+                        "type": "string",
+                        "example": "624.272.170-85"
+                    },
+                    "birthday": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "09/05/2002"
+                    },
+                    "email": {
+                        "type": "string",
+                        "example": "paulo@gmail.com"
+                    },
+                    "password": {
+                        "type": "string",
+                        "example": "123456789"
+                    },
+                    "canDrive": {
+                        "type": "string",
+                        "enum": ["yes", "no"],
+                        "example": "yes"
+                    }
+                }
             }
         }
     }
