@@ -119,6 +119,7 @@
                         }
                     }
                 ],
+
                 "responses": {
                     "400": {
                         "description": "Bad Request"
@@ -152,6 +153,74 @@
                         "required": true
                     }
                 ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Car"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update car by Id",
+                "description": "This route will be responsible for updating a car by Id",
+                "tags": ["Cars"],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the car",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "type": "object",
+                                "properties": {
+                                    "model": {
+                                        "type": "string",
+                                        "example": "Celta"
+                                    },
+                                    "type": {
+                                        "type": "string",
+                                        "example": "Hatch"
+                                    },
+                                    "brand": {
+                                        "type": "string",
+                                        "example": "Chevrolet"
+                                    },
+                                    "color": {
+                                        "type": "string",
+                                        "example": "Azul"
+                                    },
+                                    "year": {
+                                        "type": "string",
+                                        "example": "2012"
+                                    },
+
+                                    "passengersQtd": {
+                                        "type": "number",
+                                        "example": 5
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+
                 "responses": {
                     "404": {
                         "description": "Not Found"
