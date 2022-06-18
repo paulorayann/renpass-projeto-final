@@ -1,7 +1,7 @@
 const RentalRepository = require('../repository/RentalRepository');
 const NotFound = require('../errors/NotFound');
-const BadRequest = require('../errors/BadRequest');
 const SearchCEP = require('../utils/searchCep/SearchCep');
+const cnpjValidation = require('../utils/cnpjValidation');
 
 class RentalService {
     async create(payload) {
@@ -18,6 +18,11 @@ class RentalService {
             addressField.city = localidade;
             addressField.state = uf;
         }
+        if (!cnpjValidation(payload.cnpj)) {
+            throw {
+                message: 'Please enter a valid CNPJ'
+            };
+        }
         const result = await RentalRepository.create(payload);
         return result;
     }
@@ -30,9 +35,16 @@ class RentalService {
         if (!result) throw new NotFound(payload);
         return result;
     }
-    async updateRental(id, body) {
-        const result = await RentalRepository.updateRental(id, body);
-        if (!result) throw new NotFound(id, body);
+    async updateRental(id, payload) {
+        if (payload.cnpj) {
+            if (!cnpjValidation(payload.cnpj)) {
+                throw {
+                    message: 'Please enter a valid CNPJ'
+                };
+            }
+        }
+        const result = await RentalRepository.updateRental(id, payload);
+        if (!result) throw new NotFound(id, payload);
         return result;
     }
     async deleteRental(payload) {
