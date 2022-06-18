@@ -1,11 +1,10 @@
 const Joi = require('joi').extend(require('@joi/date'));
 const { cnpjValid } = require('../../utils/regex');
-const cnpjValidation = require('../../utils/cnpjValidation');
 const { cepValid } = require('../../utils/regex');
 module.exports = async (req, res, next) => {
     try {
         const rental = Joi.object({
-            name: Joi.string().trim().min(2).required(),
+            name: Joi.string().trim().min(2),
 
             cnpj: Joi.string().regex(cnpjValid).trim(),
 
@@ -23,33 +22,15 @@ module.exports = async (req, res, next) => {
             abortEarly: false
         });
 
-        if (error)
-            throw {
-                message: 'Bad Request',
-                details: [
-                    {
-                        message: error.message,
-                        description: error.description
-                    }
-                ]
-            };
-        if (!cnpjValidation(req.body.cnpj)) {
-            throw {
-                message: 'Bad Request',
-                details: [
-                    {
-                        message: error.message,
-                        description: error.description
-                    }
-                ]
-            };
-        }
+        if (error) throw error;
 
         return next();
     } catch (error) {
         return res.status(400).json({
-            details: error.details,
-            message: error.message
+            errors: error.details.map((detail) => ({
+                name: detail.path.join('.'),
+                description: detail.message
+            }))
         });
     }
 };

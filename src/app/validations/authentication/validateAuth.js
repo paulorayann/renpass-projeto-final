@@ -11,16 +11,14 @@ module.exports = async (req, res, next) => {
         const { error } = await auth.validate(req.body, {
             abortEarly: false
         });
-        if (error)
-            throw {
-                message: 'Bad Request',
-                details: [{ message: error.message }]
-            };
+        if (error) throw error;
         return next();
     } catch (error) {
         return res.status(400).json({
-            details: error.details,
-            message: error.message
+            errors: error.details.map((detail) => ({
+                name: detail.path.join('.'),
+                description: detail.message
+            }))
         });
     }
 };

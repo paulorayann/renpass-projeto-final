@@ -33,22 +33,14 @@ module.exports = async (req, res, next) => {
             abortEarly: false
         });
 
-        if (error)
-            throw {
-                message: 'Bad Request',
-                details: [
-                    {
-                        message: error.message,
-                        description: error.description
-                    }
-                ]
-            };
-
+        if (error) throw error;
         return next();
     } catch (error) {
-        return res.status(400).json({
-            details: error.details,
-            message: error.message
-        });
+        return res.status(400).json(
+            error.details.map((detail) => ({
+                description: detail.message,
+                name: detail.path.join('.')
+            }))
+        );
     }
 };
