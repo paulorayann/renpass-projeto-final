@@ -14,7 +14,7 @@ const PersonSchema = new mongoose.Schema(
             unique: true
         },
         birthday: {
-            type: Date,
+            type: String,
             required: true
         },
         email: {
