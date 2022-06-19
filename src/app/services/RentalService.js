@@ -35,7 +35,7 @@ class RentalService {
         if (!result) throw new NotFound(payload);
         return result;
     }
-    async updateRental(id, payload) {
+    async update(id, payload) {
         if (payload.cnpj) {
             if (!cnpjValidation(payload.cnpj)) {
                 throw {
@@ -43,12 +43,12 @@ class RentalService {
                 };
             }
         }
-        const result = await RentalRepository.updateRental(id, payload);
+        const result = await RentalRepository.update(id, payload);
         if (!result) throw new NotFound(id, payload);
         return result;
     }
-    async deleteRental(payload) {
-        const result = await RentalRepository.deleteRental(payload);
+    async delete(payload) {
+        const result = await RentalRepository.delete(payload);
         if (!result) throw new NotFound(payload);
         return result;
     }
