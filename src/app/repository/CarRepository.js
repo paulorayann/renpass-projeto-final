@@ -5,15 +5,6 @@ class CarRepository extends Repository {
     constructor() {
         super(CarSchema);
     }
-    async list(query) {
-        const customLabels = {
-            docs: 'vehicles'
-        };
-        const options = {
-            customLabels: customLabels
-        };
-        return CarSchema.paginate(query, options);
-    }
 
     async updateCarAccessory(id, accessoryId, updatedAccessory) {
         const result = await CarSchema.findOneAndUpdate(

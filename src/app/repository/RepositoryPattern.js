@@ -6,8 +6,9 @@ class Repository {
     async create(payload) {
         return this.schema.create(payload);
     }
-    async list(query) {
-        const { limit, offset } = query;
+
+    async list(payload) {
+        const { limit = 5, page = 0, ...query } = payload;
         const customLabels = {
             totalDocs: 'total',
             page: 'offset',
@@ -20,8 +21,8 @@ class Repository {
             hasNextPage: false
         };
         const options = {
-            limit: parseInt(limit, 10) || 10,
-            offset: parseInt(offset, 0) || 1,
+            page: Number(page),
+            limit: Number(limit),
             customLabels: customLabels
         };
         return this.schema.paginate(query, options);
