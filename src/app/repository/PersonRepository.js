@@ -5,14 +5,9 @@ class PersonRepository extends Repository {
     constructor() {
         super(PersonSchema);
     }
-    async list(query) {
-        const customLabels = {
-            docs: 'person'
-        };
-        const options = {
-            customLabels: customLabels
-        };
-        return PersonSchema.paginate(query, options);
+
+    async auth(email) {
+        return PersonSchema.findOne({ email }).select('+password');
     }
 }
 
