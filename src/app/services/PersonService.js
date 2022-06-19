@@ -17,7 +17,7 @@ class PersonService {
 
     async list(payload) {
         const result = await PersonRepository.list(payload);
-        if (!result) throw new Error(payload);
+        if (!result) throw new Error('payload');
 
         return result;
     }

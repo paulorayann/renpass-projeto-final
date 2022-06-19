@@ -15,7 +15,9 @@ class PersonController {
             const result = await PersonService.list(req.query);
             return res.status(200).json(result);
         } catch (error) {
-            return res.status(400).json(error);
+            return res
+                .status(400)
+                .json({ error: error.description, message: error.message });
         }
     }
 
