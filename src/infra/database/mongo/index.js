@@ -5,6 +5,7 @@ class Database {
     constructor() {
         this.connect();
     }
+
     connect() {
         return mongoose.connect(
             `mongodb://${config.database.host}/${config.database.collection}`,
@@ -14,6 +15,7 @@ class Database {
             }
         );
     }
+
     disconnect() {
         return mongoose.connection.close();
     }

@@ -31,12 +31,10 @@ class PersonController {
                 .json({ error, description: error.description });
         }
     }
+
     async update(req, res) {
         try {
-            const result = await PersonService.updatePerson(
-                req.params.id,
-                req.body
-            );
+            const result = await PersonService.update(req.params.id, req.body);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -47,7 +45,7 @@ class PersonController {
 
     async delete(req, res) {
         try {
-            const result = await PersonService.deletePerson(req.params.id);
+            await PersonService.delete(req.params.id);
             return res.status(200).json('success');
         } catch (error) {
             return res

@@ -1,6 +1,6 @@
-const PersonRepository = require('../repository/PersonRepository');
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
+const PersonRepository = require('../repository/PersonRepository');
 const authConfig = require('../../config/auth.json');
 
 class AuthService {

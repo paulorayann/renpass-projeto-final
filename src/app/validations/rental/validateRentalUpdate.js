@@ -1,6 +1,6 @@
 const Joi = require('joi').extend(require('@joi/date'));
 const { cnpjValid } = require('../../utils/regex');
-const { cepValid } = require('../../utils/regex');
+
 module.exports = async (req, res, next) => {
     try {
         const rental = Joi.object({

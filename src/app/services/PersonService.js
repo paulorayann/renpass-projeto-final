@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 const PersonRepository = require('../repository/PersonRepository');
 const NotFound = require('../errors/NotFound');
 const cpfValidation = require('../utils/cpfValidation');
@@ -11,13 +12,12 @@ class PersonService {
         }
         const result = await PersonRepository.create(payload);
         if (!result) throw new Error(payload);
-
         return result;
     }
 
     async list(payload) {
         const result = await PersonRepository.list(payload);
-        if (!result) throw new Error('payload');
+        if (!result) throw new Error(payload);
 
         return result;
     }
@@ -28,7 +28,7 @@ class PersonService {
         return result;
     }
 
-    async updatePerson(id, payload) {
+    async update(id, payload) {
         if (payload.cpf) {
             if (!cpfValidation(payload.cpf)) {
                 throw {
@@ -36,13 +36,13 @@ class PersonService {
                 };
             }
         }
-        const result = await PersonRepository.updatePerson(id, payload);
+        const result = await PersonRepository.update(id, payload);
         if (!result) throw new NotFound(id);
         return result;
     }
 
-    async deletePerson(payload) {
-        const result = await PersonRepository.deletePerson(payload);
+    async delete(payload) {
+        const result = await PersonRepository.delete(payload);
         if (!result) throw new NotFound(payload);
         return result;
     }

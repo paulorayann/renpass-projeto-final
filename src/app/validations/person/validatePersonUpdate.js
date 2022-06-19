@@ -1,7 +1,6 @@
 const Joi = require('joi').extend(require('@joi/date'));
 const ageValidation = require('../../utils/ageValidation');
 const { cpfValid } = require('../../utils/regex');
-const cpfValidation = require('../../utils/cpfValidation');
 
 module.exports = async (req, res, next) => {
     try {

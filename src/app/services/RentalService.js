@@ -1,3 +1,4 @@
+/* eslint-disable no-throw-literal */
 const RentalRepository = require('../repository/RentalRepository');
 const NotFound = require('../errors/NotFound');
 const SearchCEP = require('../utils/searchCep/SearchCep');
@@ -26,15 +27,18 @@ class RentalService {
         const result = await RentalRepository.create(payload);
         return result;
     }
+
     async list(payload) {
         const result = await RentalRepository.list(payload);
         return result;
     }
+
     async getById(payload) {
         const result = await RentalRepository.getById(payload);
         if (!result) throw new NotFound(payload);
         return result;
     }
+
     async update(id, payload) {
         if (payload.cnpj) {
             if (!cnpjValidation(payload.cnpj)) {
@@ -47,6 +51,7 @@ class RentalService {
         if (!result) throw new NotFound(id, payload);
         return result;
     }
+
     async delete(payload) {
         const result = await RentalRepository.delete(payload);
         if (!result) throw new NotFound(payload);

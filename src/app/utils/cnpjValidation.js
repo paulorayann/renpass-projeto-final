@@ -31,7 +31,7 @@ function cnpjValidation(cnpj) {
     result = sum % 11 < 2 ? 0 : 11 - (sum % 11);
     if (result != digits.charAt(0)) return false;
 
-    size = size + 1;
+    size += 1;
     numbers = cnpj.substring(0, size);
     sum = 0;
     pos = size - 7;

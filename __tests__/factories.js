@@ -1,5 +1,5 @@
 const faker = require('faker-br');
-const factory = require('factory-girl').factory;
+const { factory } = require('factory-girl');
 const Person = require('../src/app/schema/PersonSchema');
 
 factory.define('Person', Person, {
