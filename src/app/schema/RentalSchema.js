@@ -1,5 +1,6 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const uniqueValidator = require('mongoose-unique-validator');
 
 const RentalSchema = new mongoose.Schema(
     {
@@ -52,5 +53,10 @@ const RentalSchema = new mongoose.Schema(
     { timestamps: false, versionKey: false }
 );
 RentalSchema.plugin(mongoosePaginate);
+
+RentalSchema.plugin(uniqueValidator, {
+    message: 'The {PATH} you have entered is already registered.'
+});
+
 const Rental = mongoose.model('Rental', RentalSchema);
 module.exports = Rental;
