@@ -18,14 +18,14 @@ class CarService {
         return result;
     }
 
-    async updateCar(id, body) {
-        const result = await CarRepository.updateCar(id, body);
+    async update(id, body) {
+        const result = await CarRepository.update(id, body);
         if (!result) throw new NotFound(id, body);
         return result;
     }
 
-    async deleteCar(payload) {
-        const result = await CarRepository.deleteCar(payload);
+    async delete(payload) {
+        const result = await CarRepository.delete(payload);
         if (!result) throw new NotFound(payload);
         return result;
     }
