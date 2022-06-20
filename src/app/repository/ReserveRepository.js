@@ -7,15 +7,7 @@ class ReserveRepository extends Repository {
     }
 
     async getById(id, rentalId) {
-        return ReserveSchema.findOne({ _id: id, id_rental: rentalId });
-    }
-
-    async update(id, rentalId, payload) {
-        return ReserveSchema.findByIdAndUpdate(
-            { _id: id, id_rental: rentalId },
-            payload,
-            { new: true }
-        );
+        return ReserveSchema.findById({ _id: id, id_rental: rentalId });
     }
 
     async delete(id, rentalId) {

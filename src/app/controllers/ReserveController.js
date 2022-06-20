@@ -3,7 +3,8 @@ const ReserveService = require('../services/ReserveService');
 class ReserveController {
     async create(req, res) {
         try {
-            const result = await ReserveService.create(req.body);
+            const { rentalId } = req.params;
+            const result = await ReserveService.create(rentalId, req.body);
             return res.status(201).json(result);
         } catch (error) {
             return res
@@ -14,7 +15,7 @@ class ReserveController {
 
     async list(req, res) {
         try {
-            const result = await ReserveService.list(req.query);
+            const result = await ReserveService.list(req.query, req.params);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -25,7 +26,8 @@ class ReserveController {
 
     async getById(req, res) {
         try {
-            const result = await ReserveService.getById(req.params.id);
+            const { id, rentalId } = req.params;
+            const result = await ReserveService.getById(id, rentalId);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -36,7 +38,8 @@ class ReserveController {
 
     async update(req, res) {
         try {
-            const result = await ReserveService.update(req.params.id, req.body);
+            const { id, rentalId } = req.params;
+            const result = await ReserveService.update(rentalId, id, req.body);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -47,8 +50,9 @@ class ReserveController {
 
     async delete(req, res) {
         try {
-            await ReserveService.delete(req.params.id);
-            return res.status(200).json('success');
+            const { id, rentalId } = req.params;
+            await ReserveService.delete(id, rentalId);
+            return res.status(204).json();
         } catch (error) {
             return res
                 .status(error.errorStatus || 404)
