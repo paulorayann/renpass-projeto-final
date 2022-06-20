@@ -30,7 +30,7 @@ class PersonController {
         } catch (error) {
             return res
                 .status(error.errorStatus || 404)
-                .json({ error, description: error.description });
+                .json({ error: error.description, message: error.message });
         }
     }
 
@@ -41,7 +41,7 @@ class PersonController {
         } catch (error) {
             return res
                 .status(error.errorStatus || 404)
-                .json({ error, description: error.description });
+                .json({ error: error.description, message: error.message });
         }
     }
 
@@ -52,7 +52,7 @@ class PersonController {
         } catch (error) {
             return res
                 .status(error.errorStatus || 404)
-                .json({ error, description: error.description });
+                .json({ error: error.description, message: error.message });
         }
     }
 }
