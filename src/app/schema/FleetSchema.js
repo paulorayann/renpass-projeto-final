@@ -15,7 +15,12 @@ const FleetSchema = new mongoose.Schema(
         },
         status: {
             type: String,
-            enum: ['available', 'unavailable', 'rented']
+            enum: {
+                values: ['available', 'unavailable', 'rented'],
+                message:
+                    'Value must be "available", "unavailable" or "rented" ',
+                required: true
+            }
         },
         daily_value: {
             type: Number,

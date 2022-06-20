@@ -7,15 +7,7 @@ class FleetRepository extends Repository {
     }
 
     async getById(id, rentalId) {
-        return FleetSchema.findOne({ _id: id, id_rental: rentalId });
-    }
-
-    async update(id, rentalId, payload) {
-        return FleetSchema.findByIdAndUpdate(
-            { _id: id, id_rental: rentalId },
-            payload,
-            { new: true }
-        );
+        return FleetSchema.findById({ _id: id, id_rental: rentalId });
     }
 
     async delete(id, rentalId) {

@@ -3,7 +3,8 @@ const FleetService = require('../services/FleetService');
 class FleetController {
     async create(req, res) {
         try {
-            const result = await FleetService.create(req.body);
+            const { rentalId } = req.params;
+            const result = await FleetService.create(rentalId, req.body);
             return res.status(201).json(result);
         } catch (error) {
             return res
@@ -14,7 +15,7 @@ class FleetController {
 
     async list(req, res) {
         try {
-            const result = await FleetService.list(req.query);
+            const result = await FleetService.list(req.query, req.params);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -25,7 +26,8 @@ class FleetController {
 
     async getById(req, res) {
         try {
-            const result = await FleetService.getById(req.params.id);
+            const { id, rentalId } = req.params;
+            const result = await FleetService.getById(id, rentalId);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -36,7 +38,8 @@ class FleetController {
 
     async update(req, res) {
         try {
-            const result = await FleetService.update(req.params.id, req.body);
+            const { id, rentalId } = req.params;
+            const result = await FleetService.update(rentalId, id, req.body);
             return res.status(200).json(result);
         } catch (error) {
             return res
@@ -47,8 +50,9 @@ class FleetController {
 
     async delete(req, res) {
         try {
-            await FleetService.delete(req.params.id);
-            return res.status(200).json('success');
+            const { id, rentalId } = req.params;
+            await FleetService.delete(id, rentalId);
+            return res.status(204).json();
         } catch (error) {
             return res
                 .status(error.errorStatus || 404)
