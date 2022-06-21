@@ -1,9 +1,8 @@
 class NotFound extends Error {
-    constructor(id) {
+    constructor(field) {
         super();
-        this.errorStatus = 404;
-        this.name = 'NotFound';
-        this.message = `Id '${id}' not found`;
+        this.name = 'Not Found';
+        this.message = `'${field}' not found`;
     }
 }
 
