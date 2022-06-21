@@ -52,7 +52,7 @@ class FleetController {
         try {
             const { id, rentalId } = req.params;
             await FleetService.delete(id, rentalId);
-            return res.status(204).json();
+            return res.status(204).end();
         } catch (error) {
             return res
                 .status(error.errorStatus || 404)
