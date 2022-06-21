@@ -9,18 +9,18 @@ const NotFound = require('../errors/NotFound');
 class ReserveService {
     async create(rentalId, payload) {
         payload.id_rental = rentalId;
-        const rental = await RentalRepository.getById(rentalId);
-        if (!rental) throw new Error('id_rental not found');
+        const validRental = await RentalRepository.getById(rentalId);
+        if (!validRental) throw new Error('id_rental not found');
 
         const { id_car } = payload;
 
-        const car = await CarRepository.getById(id_car);
-        if (!car) throw new Error('id_car not found');
+        const validCar = await CarRepository.getById(id_car);
+        if (!validCar) throw new Error('id_car not found');
 
         const { id_user } = payload;
 
-        const user = await PersonRepository.getById(id_user);
-        if (!user) throw new Error('id_user not found');
+        const validUser = await PersonRepository.getById(id_user);
+        if (!validUser) throw new Error('id_user not found');
 
         const result = await ReserveRepository.create(payload);
         if (!result) throw new Error('error creating reserve');
@@ -35,8 +35,8 @@ class ReserveService {
     }
 
     async getById(payload, id) {
-        const rental = await RentalRepository.getById(id);
-        if (!rental) throw new NotFound(id);
+        const validRental = await RentalRepository.getById(id);
+        if (!validRental) throw new NotFound(id);
 
         const result = await ReserveRepository.getById(payload);
         if (!result) throw new NotFound(payload);
@@ -46,19 +46,19 @@ class ReserveService {
 
     async update(rentalId, id, payload) {
         payload.id_rental = rentalId;
-        const rental = await RentalRepository.getById(rentalId);
-        if (!rental) throw new Error('id_rental not found');
+        const validRental = await RentalRepository.getById(rentalId);
+        if (!validRental) throw new Error('id_rental not found');
 
         if (payload.id_car) {
             const { id_car } = payload;
-            const car = await CarRepository.getById(id_car);
-            if (!car) throw new Error('id_car not found');
+            const validCar = await CarRepository.getById(id_car);
+            if (!validCar) throw new Error('id_car not found');
         }
         if (payload.id_user) {
             const { id_user } = payload;
 
-            const user = await PersonRepository.getById(id_user);
-            if (!user) throw new Error('id_user not found');
+            const validUser = await PersonRepository.getById(id_user);
+            if (!validUser) throw new Error('id_user not found');
         }
 
         const result = await ReserveRepository.update(id, payload);
@@ -67,11 +67,11 @@ class ReserveService {
     }
 
     async delete(id, rentalId) {
-        const rental = await RentalRepository.getById(rentalId);
-        if (!rental) throw new Error('id_rental not found');
+        const validRental = await RentalRepository.getById(rentalId);
+        if (!validRental) throw new Error('id_rental not found');
 
-        const reserve = await ReserveRepository.getById(id, rentalId);
-        if (!reserve) throw new Error('Not found');
+        const validReserve = await ReserveRepository.getById(id, rentalId);
+        if (!validReserve) throw new Error('Not found');
 
         const result = await ReserveRepository.delete(id);
         if (!result) throw new NotFound(id);
