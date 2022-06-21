@@ -9,12 +9,12 @@ class FleetService {
     async create(rentalId, payload) {
         payload.id_rental = rentalId;
         const validRental = await RentalRepository.getById(rentalId);
-        if (!validRental) throw new Error('id_rental not found');
+        if (!validRental) throw new NotFound(`Rental Id ${rentalId}`);
 
         const { id_car } = payload;
 
         const validCar = await CarRepository.getById(id_car);
-        if (!validCar) throw new Error('id_car not found');
+        if (!validCar) throw new NotFound(`Car Id ${id_car}`);
 
         const result = await FleetRepository.create(payload);
         if (!result) throw new Error('error creating Fleet');
@@ -40,12 +40,12 @@ class FleetService {
     async update(rentalId, id, payload) {
         payload.id_rental = rentalId;
         const validRental = await RentalRepository.getById(rentalId);
-        if (!validRental) throw new Error('id_rental not found');
+        if (!validRental) throw new NotFound(`Rental Id ${rentalId}`);
 
         if (payload.id_car) {
             const { id_car } = payload;
             const validCar = await CarRepository.getById(id_car);
-            if (!validCar) throw new Error('id_car not found');
+            if (!validCar) throw new NotFound(`Car Id ${id_car}`);
         }
 
         const result = await FleetRepository.update(id, payload);
@@ -55,10 +55,10 @@ class FleetService {
 
     async delete(id, rentalId) {
         const validRental = await RentalRepository.getById(rentalId);
-        if (!validRental) throw new Error('id_rental not found');
+        if (!validRental) throw new NotFound(`Rental Id ${rentalId}`);
 
-        const validReserve = await FleetRepository.getById(id, rentalId);
-        if (!validReserve) throw new Error('Not found');
+        const validFleet = await FleetRepository.getById(id, rentalId);
+        if (!validFleet) throw new NotFound(`Fleet Id ${id}`);
 
         const result = await FleetRepository.delete(id);
         if (!result) throw new NotFound(id);
