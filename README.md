@@ -87,10 +87,17 @@ DB_COLLECTION = collection_example
 
 ...
 
-#### Run the application server
+#### Run the application
 
 ```
+#development
 npm run dev
+```
+...
+
+```
+#production
+npm start
 ```
 
 <br>
@@ -891,6 +898,404 @@ http://localhost:3000/api/v1/rental/:id
     "message": "Id '629d234406e1aa26ad7b669b' not found"
 }
 ```
+...
+
+# 🚘 Fleet Endpoints
+
+## Create Fleet
+
+`POST`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/fleet
+```
+
+### Body Example
+
+```
+{
+    "id_car": "62b0c1d0265111e89201d544",
+    "status": "available",
+    "daily_value": "500.00",
+    "plate": "ARC2341"
+}
+
+```
+
+...
+
+`Status Code: 201 Created`
+
+```
+{
+    "id_car": "62b0c1d0265111e89201d544",
+    "id_rental": "62b319d26d0f07aae85cc688",
+    "status": "available",
+    "daily_value": 500,
+    "plate": "ARC2341",
+    "_id": "62b31d0bcf1fa3486fda7faa"
+}
+```
+
+...
+
+`Status Code: 400 Bad Request`
+
+```
+{
+    "message": "'Car Id 62b0c1d0265111e89201d543' not found"
+}
+```
+
+...
+
+## List All Fleet:
+
+`GET`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/fleet
+```
+
+...
+
+`Status Code: 200 OK`
+
+```
+[
+    {
+        "_id": "62b1139f4ce2058937e2276a",
+        "id_car": "62b0ee3280525e741b204e56",
+        "id_rental": "62b0c243265111e89201d568",
+        "status": "available",
+        "daily_value": 500,
+        "plate": "ADD1345"
+    },
+    {
+        "_id": "62b113c30fc31a30145dc125",
+        "id_car": "62b0ee3280525e741b204e56",
+        "id_rental": "62b0c243265111e89201d568",
+        "status": "available",
+        "daily_value": 500,
+        "plate": "ADR3212"
+    },
+]
+```
+
+...
+
+## List Fleet by Id:
+
+`GET`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/fleet/:id
+
+```
+
+...
+
+`Status Code: 200 OK`
+
+```
+{
+    "_id": "62b290a1b1fef0fe1bfc8234",
+    "id_car": "62b0c1d0265111e89201d544",
+    "id_rental": "62b0c243265111e89201d568",
+    "status": "available",
+    "daily_value": 500,
+    "plate": "ABG5345"
+}
+
+```
+
+...
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "message": "'62b290a1b1fef0fe1bfc8233' not found"
+}
+
+```
+
+...
+
+## Update Fleet
+
+`PATCH`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/fleet/:id
+
+```
+
+### Body Example
+
+```
+{
+
+    "id_car": "62b0c1d0265111e89201d544",
+    "status": "rented",
+    "daily_value": "32.00",
+    "plate": "aba2341"
+}
+
+```
+
+`Status Code: 200 OK`
+
+```
+{
+    "_id": "62b290a1b1fef0fe1bfc8234",
+    "id_car": "62b0c1d0265111e89201d544",
+    "id_rental": "62b319d26d0f07aae85cc688",
+    "status": "rented",
+    "daily_value": 32,
+    "plate": "aba2341"
+}
+
+```
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "message": "'Car Id 62b0c1d0265111e89201d543' not found"
+}
+
+```
+
+...
+
+## Delete Fleet
+
+`DELETE`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/fleet/:id
+```
+
+`Status Code: 204 No Content`
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "message": "'Fleet Id 62b0f47085915c022cb3a267' not found"
+}
+```
+
+...
+
+# 📑 Reserve Endpoints
+
+## Create Reserve
+
+`POST`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/reserve
+```
+
+### Body Example
+
+```
+{
+    "id_user": "62b0c216265111e89201d562",
+    "data_start": "09/05/2022",
+    "data_end": "11/05/2022",
+    "id_car": "62b0c1d0265111e89201d544"
+
+}
+
+```
+
+...
+
+`Status Code: 201 Created`
+
+```
+{
+    "id_user": "62b0c216265111e89201d562",
+    "data_start": "09/05/2022",
+    "data_end": "11/05/2022",
+    "id_car": "62b0c1d0265111e89201d544",
+    "id_rental": "62b0c325ad47d9c8dccd46d7",
+    "final_value": 1000,
+    "_id": "62b32175b216eb99d57340ed"
+}
+
+```
+
+...
+
+`Status Code: 400 Bad Request`
+
+```
+{
+    "message": "The car is already booked, it was booked for the date 09/05/2022 to the date 11/05/2022"
+}
+
+Or
+
+{
+    "message": "'User Id 62b0c216265111e89201d563' not found"
+}
+
+```
+
+...
+
+## List All Reserves:
+
+`GET`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/reserve
+```
+
+...
+
+`Status Code: 200 OK`
+
+```
+{
+    "reserves": [
+        {
+            "_id": "62b29c088cfc2a9ae4a7d9c1",
+            "id_user": "62b0c1e8265111e89201d550",
+            "data_start": "01/05/2022",
+            "data_end": "10/05/2022",
+            "id_car": "62b0c1d0265111e89201d544",
+            "id_rental": "62b0c325ad47d9c8dccd46d7"
+        },
+        {
+            "_id": "62b29c258cfc2a9ae4a7d9d0",
+            "id_user": "62b0c1e8265111e89201d550",
+            "data_start": "02/05/2022",
+            "data_end": "10/05/2022",
+            "id_car": "62b0c1d0265111e89201d544",
+            "id_rental": "62b0c325ad47d9c8dccd46d7"
+        }
+    ],
+    "total": 50,
+    "limit": 15,
+    "offsets": 4,
+    "offset": 1
+}
+
+```
+
+...
+
+## List Reserve by Id:
+
+`GET`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
+
+```
+
+...
+
+`Status Code: 200 OK`
+
+```
+{
+    "_id": "62b2a30d60e7f98063987087",
+    "id_user": "62b0c1e8265111e89201d550",
+    "data_start": "11/05/2022",
+    "data_end": "14/05/2022",
+    "id_car": "62b0c1d0265111e89201d542",
+    "id_rental": "62b0c325ad47d9c8dccd46d7"
+}
+
+```
+
+...
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "message": "'62b290a1b1fef0fe1bfc8233' not found"
+}
+
+```
+
+...
+
+## Update Reserve
+
+`PATCH`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
+
+```
+
+### Body Example
+
+```
+{
+    "id_user": "62b0c216265111e89201d562",
+    "data_start": "10/05/2022",
+    "data_end": "11/05/2022",
+    "id_car": "62b0c1d0265111e89201d544",
+    "id_rental": "62b0c325ad47d9c8dccd46d7",
+    "final_value": 500,
+    "_id": "62b32300b216eb99d5734122"
+}
+
+
+```
+
+`Status Code: 200 OK`
+
+```
+{
+    "id_user": "62b0c216265111e89201d562",
+    "data_start": "02/05/2022",
+    "data_end": "04/05/2022"
+
+}
+
+
+```
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "message": "'Car Id 62b0c1d0265111e89201d543' not found"
+}
+
+```
+
+...
+
+## Delete Reserve
+
+`DELETE`
+
+```
+http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
+```
+
+`Status Code: 204 No Content`
+
+`Status Code: 404 Not Found`
+
+```
+{
+    "message": "'Reserve Id 62b0f47085915c022cb3a267' not found"
+}
+```
+
+...
 
 ## Author
 
