@@ -9,7 +9,8 @@ class Database {
 
     connect() {
         return mongoose.connect(
-            `mongodb+srv://deploy:Im0aEUaO74x2kPHJ@cluster0.9im5y.mongodb.net/?retryWrites=true&w=majority`
+            process.env.MONGO_URL ||
+                `mongodb://${config.database.host}/${config.database.collection}`
         );
     }
 
