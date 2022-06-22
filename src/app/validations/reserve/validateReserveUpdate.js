@@ -14,8 +14,7 @@ module.exports = async (req, res, next) => {
                 .message('Please enter a valid Id format (ObjectId)'),
             id_rental: Joi.string()
                 .regex(objectId)
-                .message('Please enter a valid Id format (ObjectId)'),
-            final_value: Joi.number().min(1)
+                .message('Please enter a valid Id format (ObjectId)')
         });
 
         const { error } = await reserve.validate(req.body, {
