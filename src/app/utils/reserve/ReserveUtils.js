@@ -35,14 +35,6 @@ class ReserveUtils {
         if (!dataEnd)
             throw new Error('Data_end must be after than the Data_start');
     }
-
-    static async finalValue(data_start, data_end, dailyValue) {
-        const bookedDays = moment(data_end, 'DD/MM/YYYY').diff(
-            moment(data_start, 'DD/MM/YYYY'),
-            'days'
-        );
-        return dailyValue * bookedDays;
-    }
 }
 
 module.exports = ReserveUtils;

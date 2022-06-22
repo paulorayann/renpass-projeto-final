@@ -1,8 +1,9 @@
 /* eslint-disable camelcase */
+const moment = require('moment');
 const ReserveRepository = require('../repository/ReserveRepository');
 const RentalRepository = require('../repository/RentalRepository');
 const PersonRepository = require('../repository/PersonRepository');
-const CarRepository = require('../repository/CarRepository');
+const FleetRepository = require('../repository/FleetRepository');
 
 const CantDrive = require('../errors/CantDrive');
 const NotFound = require('../errors/NotFound');
@@ -15,8 +16,8 @@ class ReserveService {
         if (!validRental) throw new NotFound(`Rental Id ${rentalId}`);
 
         const { id_car } = payload;
-        const validCar = await CarRepository.getById(payload.id_car, rentalId);
-        if (!validCar) throw new NotFound(`Car Id ${id_car}`);
+        const validCar = await FleetRepository.list({ id_car });
+        if (validCar.length < 1) throw new NotFound(`Car Id ${id_car}`);
 
         const { id_user } = payload;
         const validUser = await PersonRepository.getById(id_user);
@@ -32,6 +33,17 @@ class ReserveService {
             payload.data_start,
             payload.data_end
         );
+
+        const dailyValue = await FleetRepository.list({ id_car });
+        const getDailyValue = dailyValue[0].daily_value;
+
+        const { data_start, data_end } = payload;
+
+        const bookedDays = moment(data_end, 'DD/MM/YYYY').diff(
+            moment(data_start, 'DD/MM/YYYY'),
+            'days'
+        );
+        payload.final_value = getDailyValue * bookedDays;
 
         const result = await ReserveRepository.create(payload);
         if (!result) throw new Error('error creating reserve');
@@ -62,8 +74,8 @@ class ReserveService {
 
         if (payload.id_car) {
             const { id_car } = payload;
-            const validCar = await CarRepository.getById(id_car);
-            if (!validCar) throw new NotFound(`Car Id ${id_car}`);
+            const validCar = await FleetRepository.list({ id_car });
+            if (validCar.length < 1) throw new NotFound(`Car Id ${id_car}`);
         }
         if (payload.id_user) {
             const { id_user } = payload;
@@ -81,6 +93,18 @@ class ReserveService {
             payload.data_start,
             payload.data_end
         );
+
+        const { id_car } = payload;
+        const dailyValue = await FleetRepository.list({ id_car });
+        const getDailyValue = dailyValue[0].daily_value;
+
+        const { data_start, data_end } = payload;
+
+        const bookedDays = moment(data_end, 'DD/MM/YYYY').diff(
+            moment(data_start, 'DD/MM/YYYY'),
+            'days'
+        );
+        payload.final_value = getDailyValue * bookedDays;
 
         const result = await ReserveRepository.update(id, payload);
         if (!result) throw new NotFound(id);
