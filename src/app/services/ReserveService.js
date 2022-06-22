@@ -52,7 +52,7 @@ class ReserveService {
 
     async list(payload) {
         const result = await ReserveRepository.list(payload);
-        if (result.docs.length === 0)
+        if (result.reserves.length === 0)
             throw new Error('There are no Reservations');
         return result;
     }

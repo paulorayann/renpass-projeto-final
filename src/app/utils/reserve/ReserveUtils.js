@@ -12,7 +12,7 @@ class ReserveUtils {
             data_end
         });
 
-        result.docs.forEach((reserve) => {
+        result.reserves.forEach((reserve) => {
             const { data_start, data_end } = reserve;
             throw new Error(
                 `The car is already booked, it was booked for the date ${data_start} to the date ${data_end}`
