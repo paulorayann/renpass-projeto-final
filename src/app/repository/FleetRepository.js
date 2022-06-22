@@ -1,3 +1,4 @@
+/* eslint-disable camelcase */
 const FleetSchema = require('../schema/FleetSchema');
 const Repository = require('./RepositoryPattern');
 
@@ -6,8 +7,12 @@ class FleetRepository extends Repository {
         super(FleetSchema);
     }
 
-    async getById(id, rentalId) {
-        return FleetSchema.findById({ _id: id, id_rental: rentalId });
+    async list(payload) {
+        return FleetSchema.find(payload);
+    }
+
+    async getById(payload) {
+        return FleetSchema.findById(payload);
     }
 
     async delete(id, rentalId) {
