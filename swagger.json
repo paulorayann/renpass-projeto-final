@@ -14,14 +14,67 @@
         {
             "url": "http://localhost:3000/api/v1",
             "description": "Renpass.UOL API"
+        },
+        {
+            "url": "renpassuol-paulo.herokuapp.com/api/v1/api-docs",
+            "description": "Renpass.UOL Heroku"
         }
     ],
     "paths": {
+        "/authenticate": {
+            "post": {
+                "summary": "Authenticate User",
+                "description": "This route will be used to authenticate a user",
+                "tags": [
+                    "Authentication"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Person"
+                            },
+                            "examples": {
+                                "Person": {
+                                    "value": {
+                                        "email": "paulorayann@email.com",
+                                        "password": "123456789"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "User Authenticated",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Person"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
         "/car": {
             "post": {
                 "summary": "Post a car",
                 "description": "This route will be responsible for creating a new car",
-                "tags": ["Cars"],
+                "tags": [
+                    "Cars"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -52,7 +105,14 @@
             "get": {
                 "summary": "Get all cars",
                 "description": "This route will be responsible for listing all cars",
-                "tags": ["Cars"],
+                "tags": [
+                    "Cars"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "model",
@@ -119,7 +179,6 @@
                         }
                     }
                 ],
-
                 "responses": {
                     "400": {
                         "description": "Bad Request"
@@ -144,7 +203,14 @@
             "get": {
                 "summary": "Get car by Id",
                 "description": "This route will be responsible for listing a car by Id",
-                "tags": ["Cars"],
+                "tags": [
+                    "Cars"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -175,7 +241,14 @@
             "patch": {
                 "summary": "Update car by Id",
                 "description": "This route will be responsible for updating a car by Id",
-                "tags": ["Cars"],
+                "tags": [
+                    "Cars"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -210,7 +283,6 @@
                                         "type": "string",
                                         "example": "2012"
                                     },
-
                                     "passengersQtd": {
                                         "type": "number",
                                         "example": 5
@@ -220,7 +292,6 @@
                         }
                     }
                 },
-
                 "responses": {
                     "404": {
                         "description": "Not Found"
@@ -243,7 +314,14 @@
             "delete": {
                 "summary": "Delete car by Id",
                 "description": "This route will be responsible for deleting a car by Id",
-                "tags": ["Cars"],
+                "tags": [
+                    "Cars"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -272,11 +350,72 @@
                 }
             }
         },
+        "/car/{id}/accessories/{accessoryId}": {
+            "patch": {
+                "summary": "Update an accessory to car by Id",
+                "description": "This route will be responsible for updating an accessory to car by Id",
+                "tags": [
+                    "Cars"
+                ],
+                "security": [
+                    {
+                        "bearerAuth": []
+                    }
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the car",
+                        "required": true
+                    },
+                    {
+                        "name": "accessoryId",
+                        "in": "path",
+                        "description": "Id of the accessory",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Car"
+                            },
+                            "examples": {
+                                "car": {
+                                    "value": {
+                                        "description": "Motor 1.4"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Car"
+                                }
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Not Found"
+                    }
+                }
+            }
+        },
         "/person/": {
             "post": {
                 "summary": "Create person",
                 "description": "This route will be responsible for creating a person",
-                "tags": ["Person"],
+                "tags": [
+                    "Person"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -306,7 +445,9 @@
             "get": {
                 "summary": "Get all Person",
                 "description": "This route will be responsible for listing person",
-                "tags": ["Person"],
+                "tags": [
+                    "Person"
+                ],
                 "parameters": [
                     {
                         "name": "name",
@@ -357,7 +498,6 @@
                         }
                     }
                 ],
-
                 "responses": {
                     "400": {
                         "description": "Bad Request"
@@ -382,7 +522,9 @@
             "get": {
                 "summary": "Get Person by Id",
                 "description": "This route will be responsible for listing a Person by Id",
-                "tags": ["Person"],
+                "tags": [
+                    "Person"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -413,7 +555,9 @@
             "patch": {
                 "summary": "Update Person by Id",
                 "description": "This route will be responsible for updating a Person by Id",
-                "tags": ["Person"],
+                "tags": [
+                    "Person"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -436,7 +580,6 @@
                                         "type": "string",
                                         "example": "236.006.660-96"
                                     },
-
                                     "email": {
                                         "type": "string",
                                         "example": "xuxameneghel@email.com"
@@ -445,7 +588,6 @@
                                         "type": "string",
                                         "example": "14435567"
                                     },
-
                                     "canDrive": {
                                         "type": "number",
                                         "example": "yes"
@@ -455,7 +597,6 @@
                         }
                     }
                 },
-
                 "responses": {
                     "404": {
                         "description": "Not Found"
@@ -478,7 +619,9 @@
             "delete": {
                 "summary": "Delete Person by Id",
                 "description": "This route will be responsible for deleting a Person by Id",
-                "tags": ["Person"],
+                "tags": [
+                    "Person"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -511,7 +654,9 @@
             "post": {
                 "summary": "Create Rental",
                 "description": "This route will be responsible for creating a Rental",
-                "tags": ["Rental"],
+                "tags": [
+                    "Rental"
+                ],
                 "requestBody": {
                     "content": {
                         "application/json": {
@@ -541,7 +686,9 @@
             "get": {
                 "summary": "Get all Rentals",
                 "description": "This route will be responsible for listing Rentals",
-                "tags": ["Rental"],
+                "tags": [
+                    "Rental"
+                ],
                 "parameters": [
                     {
                         "name": "cep",
@@ -608,7 +755,6 @@
                         }
                     }
                 ],
-
                 "responses": {
                     "400": {
                         "description": "Bad Request"
@@ -633,7 +779,9 @@
             "get": {
                 "summary": "Get Rental by Id",
                 "description": "This route will be responsible for listing a Rental by Id",
-                "tags": ["Rental"],
+                "tags": [
+                    "Rental"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -664,7 +812,9 @@
             "patch": {
                 "summary": "Update Rental by Id",
                 "description": "This route will be responsible for updating a Rental by Id",
-                "tags": ["Rental"],
+                "tags": [
+                    "Rental"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -716,7 +866,6 @@
                         }
                     }
                 },
-
                 "responses": {
                     "404": {
                         "description": "Not Found"
@@ -739,7 +888,9 @@
             "delete": {
                 "summary": "Delete Rental by Id",
                 "description": "This route will be responsible for deleting a Rental by Id",
-                "tags": ["Rental"],
+                "tags": [
+                    "Rental"
+                ],
                 "parameters": [
                     {
                         "name": "id",
@@ -760,6 +911,441 @@
                                     "type": "array",
                                     "items": {
                                         "$ref": "#/components/schemas/Rental"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rental/{rentalId}/fleet": {
+            "parameters": [
+                {
+                    "name": "rentalId",
+                    "in": "path",
+                    "description": "Id of the Rental",
+                    "required": true
+                }
+            ],
+            "post": {
+                "summary": "Create Fleet",
+                "description": "This route will be responsible for creating a Fleet",
+                "tags": [
+                    "Fleet"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Fleet"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Fleet"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get all Fleets",
+                "description": "This route will be responsible for listing Fleets",
+                "tags": [
+                    "Fleet"
+                ],
+                "parameters": [
+                    {
+                        "name": "id_car",
+                        "in": "query",
+                        "description": "Filter by id_car",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "status",
+                        "in": "query",
+                        "description": "Filter by status",
+                        "schema": {
+                            "type": "enum",
+                            "enum": [
+                                "available",
+                                "rented",
+                                "unavailable"
+                            ]
+                        }
+                    },
+                    {
+                        "name": "daily_value",
+                        "in": "query",
+                        "description": "Filter by daily_value",
+                        "schema": {
+                            "type": "number"
+                        }
+                    },
+                    {
+                        "name": "plate",
+                        "in": "query",
+                        "description": "Filter by plate",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Rental"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rental/{rentalId}/fleet/{id}": {
+            "parameters": [
+                {
+                    "name": "rentalId",
+                    "in": "path",
+                    "description": "Id of the Rental",
+                    "required": true
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of the Fleet",
+                    "required": true
+                }
+            ],
+            "get": {
+                "summary": "Get Fleet by Id",
+                "description": "This route will be responsible for listing a Fleet by Id",
+                "tags": [
+                    "Fleet"
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Fleet"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Fleet by Id",
+                "description": "This route will be responsible for updating a Fleet by Id",
+                "tags": [
+                    "Fleet"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Fleet",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Fleet"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Fleet"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Fleet by Id",
+                "description": "This route will be responsible for deleting a Fleet by Id",
+                "tags": [
+                    "Fleet"
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Fleet"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rental/{rentalId}/reserve": {
+            "parameters": [
+                {
+                    "name": "rentalId",
+                    "in": "path",
+                    "description": "Id of the Rental",
+                    "required": true
+                }
+            ],
+            "post": {
+                "summary": "Create Reserve",
+                "description": "This route will be responsible for creating a Reserve",
+                "tags": [
+                    "Reserve"
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reserve"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "201": {
+                        "description": "Created",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "object",
+                                    "$ref": "#/components/schemas/Reserve"
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "get": {
+                "summary": "Get all Reserves",
+                "description": "This route will be responsible for listing Reserves",
+                "tags": [
+                    "Reserve"
+                ],
+                "parameters": [
+                    {
+                        "name": "id_car",
+                        "in": "query",
+                        "description": "Filter by id_car",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id_rental",
+                        "in": "query",
+                        "description": "Filter by id_rental",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "id_user",
+                        "in": "query",
+                        "description": "Filter by id_user",
+                        "schema": {
+                            "type": "string"
+                        }
+                    },
+                    {
+                        "name": "data_start",
+                        "in": "query",
+                        "description": "Filter by data_start",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "data_end",
+                        "in": "query",
+                        "description": "Filter by data_end",
+                        "schema": {
+                            "type": "string",
+                            "format": "date"
+                        }
+                    },
+                    {
+                        "name": "final_value",
+                        "in": "query",
+                        "description": "Filter by final_value",
+                        "schema": {
+                            "type": "number"
+                        }
+                    }
+                ],
+                "responses": {
+                    "400": {
+                        "description": "Bad Request"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "$ref": "#/components/schemas/Rental"
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/rental/{rentalId}/reserve/{id}": {
+            "parameters": [
+                {
+                    "name": "rentalId",
+                    "in": "path",
+                    "description": "Id of the Rental",
+                    "required": true
+                },
+                {
+                    "name": "id",
+                    "in": "path",
+                    "description": "Id of the Reserve",
+                    "required": true
+                }
+            ],
+            "get": {
+                "summary": "Get Reserve by Id",
+                "description": "This route will be responsible for listing a Reserve by Id",
+                "tags": [
+                    "Reserve"
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Reserve"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "summary": "Update Reserve by Id",
+                "description": "This route will be responsible for updating a Reserve by Id",
+                "tags": [
+                    "Reserve"
+                ],
+                "parameters": [
+                    {
+                        "name": "id",
+                        "in": "path",
+                        "description": "Id of the Reserve",
+                        "required": true
+                    }
+                ],
+                "requestBody": {
+                    "content": {
+                        "application/json": {
+                            "schema": {
+                                "$ref": "#/components/schemas/Reserve"
+                            }
+                        }
+                    }
+                },
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "200": {
+                        "description": "OK",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Reserve"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "summary": "Delete Reserve by Id",
+                "description": "This route will be responsible for deleting a Reserve by Id",
+                "tags": [
+                    "Reserve"
+                ],
+                "responses": {
+                    "404": {
+                        "description": "Not Found"
+                    },
+                    "204": {
+                        "description": "No Content",
+                        "content": {
+                            "application/json": {
+                                "schema": {
+                                    "type": "array",
+                                    "items": {
+                                        "$ref": "#/components/schemas/Reserve"
                                     }
                                 }
                             }
@@ -809,9 +1395,6 @@
                     "passengersQtd": {
                         "type": "number",
                         "example": 5
-                    },
-                    "_id": {
-                        "type": "string"
                     }
                 }
             },
@@ -833,7 +1416,7 @@
                     },
                     "email": {
                         "type": "string",
-                        "example": "paulorayann@gmail.com"
+                        "example": "paulorayann@email.com"
                     },
                     "password": {
                         "type": "string",
@@ -841,7 +1424,10 @@
                     },
                     "canDrive": {
                         "type": "string",
-                        "enum": ["yes", "no"],
+                        "enum": [
+                            "yes",
+                            "no"
+                        ],
                         "example": "yes"
                     }
                 }
@@ -870,12 +1456,10 @@
                                     "type": "string",
                                     "example": "66640-677"
                                 },
-
                                 "number": {
                                     "type": "string",
                                     "example": "18"
                                 },
-
                                 "isFilial": {
                                     "type": "boolean",
                                     "example": true
@@ -884,6 +1468,62 @@
                         }
                     }
                 }
+            },
+            "Fleet": {
+                "type": "object",
+                "properties": {
+                    "id_car": {
+                        "type": "string",
+                        "example": "62b0ee3280525e741b204e56"
+                    },
+                    "status": {
+                        "type": "enum",
+                        "enum": [
+                            "available",
+                            "rented",
+                            "unavailable"
+                        ],
+                        "example": "available"
+                    },
+                    "daily_value": {
+                        "type": "number",
+                        "example": 100
+                    },
+                    "plate": {
+                        "type": "string",
+                        "example": "ABC1234"
+                    }
+                }
+            },
+            "Reserve": {
+                "type": "object",
+                "properties": {
+                    "id_user": {
+                        "type": "string",
+                        "example": "62b0c1e8265111e89201d550"
+                    },
+                    "data_start": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "01/05/2022"
+                    },
+                    "data_end": {
+                        "type": "string",
+                        "format": "date",
+                        "example": "05/05/2022"
+                    },
+                    "id_car": {
+                        "type": "string",
+                        "example": "62b0ee3280525e741b204e56"
+                    }
+                }
+            }
+        },
+        "securitySchemes": {
+            "bearerAuth": {
+                "type": "http",
+                "scheme": "bearer",
+                "bearerFormat": "JWT"
             }
         }
     }
