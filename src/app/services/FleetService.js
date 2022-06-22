@@ -23,7 +23,6 @@ class FleetService {
 
     async list(payload) {
         const result = await FleetRepository.list(payload);
-        if (result.docs.length === 0) throw new Error('There are no Fleets');
         return result;
     }
 
