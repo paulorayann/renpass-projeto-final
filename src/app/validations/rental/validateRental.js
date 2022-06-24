@@ -1,4 +1,5 @@
 const Joi = require('joi').extend(require('@joi/date'));
+const cnpjValidation = require('../../utils/cnpjValidation');
 const { cnpjValid } = require('../../utils/regex');
 const { cepValid } = require('../../utils/regex');
 
@@ -13,6 +14,11 @@ module.exports = async (req, res, next) => {
                 .message(
                     'The CNPJ field has an invalid format, please try XX.XXX.XXX/XXXX-XX and use numbers only'
                 )
+                .custom((cnpj, help) => {
+                    if (!cnpjValidation(cnpj)) {
+                        return help.message('Please enter a valid CNPJ');
+                    }
+                })
                 .required(),
 
             activities: Joi.string().trim().min(2).required(),

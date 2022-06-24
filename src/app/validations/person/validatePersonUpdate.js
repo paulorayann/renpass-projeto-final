@@ -1,5 +1,6 @@
 const Joi = require('joi').extend(require('@joi/date'));
 const ageValidation = require('../../utils/ageValidation');
+const cpfValidation = require('../../utils/cpfValidation');
 const { cpfValid } = require('../../utils/regex');
 
 module.exports = async (req, res, next) => {
@@ -14,14 +15,19 @@ module.exports = async (req, res, next) => {
                 .regex(cpfValid)
                 .message(
                     'The CPF field has an invalid format, please try XXX.XXX.XXX-XX and use numbers only'
-                ),
+                )
+                .custom((cpf, help) => {
+                    if (!cpfValidation(cpf)) {
+                        return help.message('Please enter a valid CPF');
+                    }
+                }),
 
             birthday: Joi.date()
 
                 .format('DD/MM/YYYY')
                 .max('now')
-                .custom((value, help) => {
-                    if (ageValidation(value) === false) {
+                .custom((age, help) => {
+                    if (!ageValidation(age)) {
                         return help.message('User must be at least 18');
                     }
                 }),
