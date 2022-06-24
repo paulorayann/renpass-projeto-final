@@ -1,7 +1,6 @@
 const mongoose = require('mongoose');
 const bcrypt = require('bcryptjs');
 const mongoosePaginate = require('mongoose-paginate-v2');
-const uniqueValidator = require('mongoose-unique-validator');
 
 const PersonSchema = new mongoose.Schema(
     {
@@ -47,9 +46,6 @@ PersonSchema.pre('save', async function (next) {
 });
 
 PersonSchema.plugin(mongoosePaginate);
-PersonSchema.plugin(uniqueValidator, {
-    message: 'The {PATH} you have entered is already registered.'
-});
 
 const Person = mongoose.model('Person', PersonSchema);
 
