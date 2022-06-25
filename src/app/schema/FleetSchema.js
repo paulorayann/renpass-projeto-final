@@ -1,38 +1,38 @@
 const mongoose = require('mongoose');
 const mongoosePaginate = require('mongoose-paginate-v2');
+const { status } = require('../utils/enums/enums');
 
 const FleetSchema = new mongoose.Schema(
-    {
-        id_car: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Car',
-            required: true
-        },
-        id_rental: {
-            type: mongoose.Schema.Types.ObjectId,
-            ref: 'Rental',
-            required: true
-        },
-        status: {
-            type: String,
-            enum: {
-                values: ['available', 'unavailable', 'rented'],
-                message:
-                    'Value must be "available", "unavailable" or "rented" ',
-                required: true
-            }
-        },
-        daily_value: {
-            type: Number,
-            required: true
-        },
-        plate: {
-            type: String,
-            required: true,
-            unique: true
-        }
+  {
+    id_car: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Car',
+      required: true
     },
-    { timestamps: false, versionKey: false }
+    id_rental: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: 'Rental',
+      required: true
+    },
+    status: {
+      type: String,
+      enum: {
+        values: [...status],
+        message: 'Value must be "available", "unavailable" or "rented" ',
+        required: true
+      }
+    },
+    daily_value: {
+      type: Number,
+      required: true
+    },
+    plate: {
+      type: String,
+      required: true,
+      unique: true
+    }
+  },
+  { timestamps: false, versionKey: false }
 );
 
 FleetSchema.plugin(mongoosePaginate);

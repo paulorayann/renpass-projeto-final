@@ -1,28 +1,23 @@
 const jwt = require('jsonwebtoken');
-const authConfig = require('../../config/auth.json');
+require('dotenv').config();
 
 module.exports = (req, res, next) => {
-    const authHeader = req.headers.authorization;
+  const authHeader = req.headers.authorization;
+  if (!authHeader) res.status(401).json({ message: 'Token not provided' });
 
-    if (!authHeader)
-        return res.status(401).send({ error: 'Token not provided' });
+  const parts = authHeader.split(' ');
+  if (!parts.length === 2) return res.status(401).send({ error: 'Token error' });
 
-    const parts = authHeader.split(' ');
+  const [scheme, token] = parts;
 
-    if (!parts.length === 2)
-        return res.status(401).send({ error: 'Token error' });
-
-    const [scheme, token] = parts;
-
-    if (!/^Bearer$/i.test(scheme))
-        return res.status(401).send({
-            error: 'Token is not in a valid format, please try "Bearer (token)"'
-        });
-
-    jwt.verify(token, authConfig.secret, (err, decoded) => {
-        if (err) return res.status(401).send({ error: 'Invalid Token' });
-
-        req.userId = decoded.id;
+  if (!/^Bearer$/i.test(scheme))
+    return res.status(401).send({
+      error: 'Token is not in a valid format, please try "Bearer (token)"'
     });
-    return next();
+
+  jwt.verify(token, process.env.SECRET, (error, decoded) => {
+    if (error) throw res.status(401).send({ error: 'Token is not valid' });
+    req.userId = decoded.id;
+  });
+  return next();
 };
