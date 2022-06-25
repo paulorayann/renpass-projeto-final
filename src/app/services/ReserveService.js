@@ -4,8 +4,8 @@ const RentalRepository = require('../repository/RentalRepository');
 const PersonRepository = require('../repository/PersonRepository');
 const FleetRepository = require('../repository/FleetRepository');
 
-const CantDrive = require('../errors/CantDrive');
 const NotFound = require('../errors/NotFound');
+const BadRequest = require('../errors/BadRequest');
 const ReserveUtils = require('../utils/reserve/ReserveUtils');
 
 class ReserveService {
@@ -23,7 +23,7 @@ class ReserveService {
     if (!validUser) throw new NotFound(`User Id ${id_user}`);
 
     if (validUser.canDrive !== 'yes') {
-      throw new CantDrive(id_user);
+      throw new BadRequest(`User ${id_user} can't drive`);
     }
 
     await ReserveUtils.validDate(payload.data_start, payload.data_end);
@@ -44,7 +44,6 @@ class ReserveService {
 
   async list(payload) {
     const result = await ReserveRepository.list(payload);
-    if (result.reserves.length === 0) throw new Error('There are no Reservations');
     return result;
   }
 
@@ -74,7 +73,7 @@ class ReserveService {
       if (!validUser) throw new NotFound(`User Id ${id_user}`);
 
       if (validUser.canDrive !== 'yes') {
-        throw new CantDrive(id_user);
+        throw new BadRequest(`User ${id_user} can't drive`);
       }
     }
 
