@@ -14,6 +14,9 @@ class CarController {
     const payload = req.query;
     try {
       const result = await CarService.list(payload);
+      if (result.vehicles.length === 0) {
+        return res.status(204).end();
+      }
       return res.status(200).json(result);
     } catch (error) {
       return res.status(error.errorStatus || 400).json({ error: error.description, message: error.message });

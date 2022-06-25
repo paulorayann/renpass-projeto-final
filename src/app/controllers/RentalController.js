@@ -13,6 +13,9 @@ class RentalController {
   async list(req, res) {
     try {
       const result = await RentalService.list(req.query);
+      if (result.rentals.length === 0) {
+        return res.status(204).end();
+      }
       return res.status(200).json(result);
     } catch (error) {
       return res.status(error.errorStatus || 400).json({ error: error.description, message: error.message });

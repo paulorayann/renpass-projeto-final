@@ -14,6 +14,9 @@ class ReserveController {
   async list(req, res) {
     try {
       const result = await ReserveService.list(req.query, req.params);
+      if (result.reserves.length === 0) {
+        return res.status(204).json();
+      }
       return res.status(200).json(result);
     } catch (error) {
       return res.status(400).json({ error: error.description, message: error.message });
