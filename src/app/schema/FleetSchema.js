@@ -24,7 +24,8 @@ const FleetSchema = new mongoose.Schema(
     },
     daily_value: {
       type: Number,
-      required: true
+      required: true,
+      min: 0
     },
     plate: {
       type: String,
