@@ -481,7 +481,7 @@
                         }
                     },
                     {
-                        "name": "birthday",
+                        "name": "birthDay",
                         "in": "query",
                         "description": "Filter by birthday",
                         "schema": {
@@ -715,9 +715,9 @@
                 ],
                 "parameters": [
                     {
-                        "name": "cep",
+                        "name": "zipCode",
                         "in": "query",
-                        "description": "Filter by cep",
+                        "description": "Filter by zipCode",
                         "schema": {
                             "type": "string"
                         }
@@ -876,7 +876,7 @@
                                         "items": {
                                             "type": "object",
                                             "properties": {
-                                                "cep": {
+                                                "zipCode": {
                                                     "type": "string",
                                                     "example": "66640-677"
                                                 },
@@ -1466,7 +1466,7 @@
                         "type": "string",
                         "example": "077.199.870-80"
                     },
-                    "birthday": {
+                    "birthDay": {
                         "type": "string",
                         "format": "date",
                         "example": "09/05/2002"
@@ -1509,7 +1509,7 @@
                         "items": {
                             "type": "object",
                             "properties": {
-                                "cep": {
+                                "zipCode": {
                                     "type": "string",
                                     "example": "66640-677"
                                 },
