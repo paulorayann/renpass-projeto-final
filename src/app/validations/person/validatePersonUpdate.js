@@ -20,7 +20,7 @@ module.exports = async (req, res, next) => {
           return req.body;
         }),
 
-      birthday: Joi.date()
+      birthDay: Joi.date()
 
         .format('DD/MM/YYYY')
         .max('now')

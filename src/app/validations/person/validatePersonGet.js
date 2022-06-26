@@ -14,7 +14,7 @@ module.exports = async (req, res, next) => {
         .max(14)
         .regex(cpfValid)
         .message('The CPF field has an invalid format, please try XXX.XXX.XXX-XX and use numbers only'),
-      birthday: Joi.date().format('DD/MM/YYYY').max('now'),
+      birthDay: Joi.date().format('DD/MM/YYYY').max('now'),
       email: Joi.string().trim().email(),
       canDrive: Joi.string()
         .trim()

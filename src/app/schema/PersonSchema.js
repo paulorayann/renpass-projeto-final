@@ -14,9 +14,10 @@ const PersonSchema = new mongoose.Schema(
       required: true,
       unique: true
     },
-    birthday: {
-      type: String,
-      required: true
+    birthDay: {
+      type: Date,
+      required: true,
+      max: new Date()
     },
     email: {
       type: String,
