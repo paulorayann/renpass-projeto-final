@@ -7,7 +7,7 @@ class FleetController {
       const result = await FleetService.create(rentalId, req.body);
       return res.status(201).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(error.errorStatus || 400).json({ error: error.description, message: error.message });
     }
   }
 
@@ -19,7 +19,7 @@ class FleetController {
       }
       return res.status(200).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(error.errorStatus || 400).json({ error: error.description, message: error.message });
     }
   }
 

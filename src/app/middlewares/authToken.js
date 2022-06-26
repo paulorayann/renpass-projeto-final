@@ -6,7 +6,7 @@ module.exports = (req, res, next) => {
   if (!authHeader) res.status(401).json({ message: 'Token not provided' });
 
   const parts = authHeader.split(' ');
-  if (!parts.length === 2) return res.status(401).send({ error: 'Token error' });
+  if (parts.length !== 2) return res.status(401).send({ error: 'Token error' });
 
   const [scheme, token] = parts;
 

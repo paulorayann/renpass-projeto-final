@@ -6,7 +6,7 @@ class PersonController {
       const result = await PersonService.create(req.body);
       return res.status(201).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(error.errorStatus || 400).json({ error: error.description, message: error.message });
     }
   }
 
@@ -18,7 +18,7 @@ class PersonController {
       }
       return res.status(200).json(result);
     } catch (error) {
-      return res.status(400).json({ error: error.description, message: error.message });
+      return res.status(error.errorStatus || 404).json({ error: error.description, message: error.message });
     }
   }
 
