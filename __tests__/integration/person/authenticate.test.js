@@ -28,10 +28,18 @@ it('should return a token value for the authentication', async () => {
   expect(authenticate2.body).toHaveProperty('token');
 });
 
-it('should not be able to authenticate person with invalid credentials', async () => {
+it('should not be able to authenticate person with invalid email', async () => {
   const authenticate = await request(app).post('/api/v1/authenticate').send({
     email: 'wrongcredentials@auth.com',
     password: '123456789'
+  });
+  expect(authenticate.statusCode).toBe(401);
+});
+
+it('should not be able to authenticate person with invalid email', async () => {
+  const authenticate = await request(app).post('/api/v1/authenticate').send({
+    email: 'authtest@auth.com',
+    password: 'wrongpassword'
   });
   expect(authenticate.statusCode).toBe(401);
 });
