@@ -1,6 +1,7 @@
 const RentalRepository = require('../repository/RentalRepository');
 const NotFound = require('../errors/NotFound');
 const SearchCEP = require('../utils/searchCep/SearchCep');
+const BadRequest = require('../errors/BadRequest');
 
 class RentalService {
   async create(payload) {
@@ -16,14 +17,14 @@ class RentalService {
       addressField.city = localidade;
       addressField.state = uf;
     }
-
     const result = await RentalRepository.create(payload);
-    console.log(result);
+    if (!result) throw new BadRequest(payload);
     return result;
   }
 
   async list(payload) {
     const result = await RentalRepository.list(payload);
+    if (!result) throw new BadRequest(payload);
     return result;
   }
 

@@ -1,9 +1,11 @@
 const CarRepository = require('../repository/CarRepository');
 const NotFound = require('../errors/NotFound');
+const BadRequest = require('../errors/BadRequest');
 
 class CarService {
   async create(payload) {
     const result = await CarRepository.create(payload);
+    if (!result) throw new BadRequest(payload);
     return result;
   }
 
@@ -33,6 +35,7 @@ class CarService {
 
   async updateCarAccessory(id, accessoryId, updatedAccessory) {
     const result = await CarRepository.updateCarAccessory(id, accessoryId, updatedAccessory);
+    if (!result) throw new NotFound(`Id ${id}`);
     return result;
   }
 }
