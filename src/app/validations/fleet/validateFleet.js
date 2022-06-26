@@ -5,8 +5,8 @@ const { status } = require('../../utils/enums/enums');
 module.exports = async (req, res, next) => {
   try {
     const fleet = Joi.object({
-      id_car: Joi.string().regex(objectId).message('Please enter a valid Id format (ObjectId)').required(),
-      id_rental: Joi.string().regex(objectId).message('Please enter a valid Id format (ObjectId)'),
+      id_car: Joi.string().regex(objectId).message('Please enter a valid Car Id format (ObjectId)').required(),
+      id_rental: Joi.string().regex(objectId).message('Please enter a valid Rental Id format (ObjectId)'),
       status: Joi.string()
         .valid(...status)
         .required(),
