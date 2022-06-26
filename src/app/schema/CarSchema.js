@@ -33,9 +33,23 @@ const CarSchema = new mongoose.Schema(
     ],
     passengersQtd: {
       type: Number
+    },
+    __v: {
+      type: Number,
+      select: false
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      select: false
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+      select: false
     }
   },
-  { timestamps: false, versionKey: false }
+  { timestamps: true }
 );
 
 CarSchema.plugin(mongoosePaginate);

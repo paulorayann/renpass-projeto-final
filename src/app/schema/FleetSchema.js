@@ -30,9 +30,23 @@ const FleetSchema = new mongoose.Schema(
       type: String,
       required: true,
       unique: true
+    },
+    __v: {
+      type: Number,
+      select: false
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      select: false
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+      select: false
     }
   },
-  { timestamps: false, versionKey: false }
+  { timestamps: true }
 );
 
 FleetSchema.plugin(mongoosePaginate);

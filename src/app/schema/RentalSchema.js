@@ -47,9 +47,23 @@ const RentalSchema = new mongoose.Schema(
         },
         _id: false
       }
-    ]
+    ],
+    __v: {
+      type: Number,
+      select: false
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      select: false
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+      select: false
+    }
   },
-  { timestamps: false, versionKey: false }
+  { timestamps: true }
 );
 RentalSchema.plugin(mongoosePaginate);
 

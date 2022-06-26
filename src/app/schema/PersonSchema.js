@@ -26,7 +26,8 @@ const PersonSchema = new mongoose.Schema(
     },
     password: {
       type: String,
-      required: true
+      required: true,
+      select: false
     },
     canDrive: {
       type: String,
@@ -35,9 +36,23 @@ const PersonSchema = new mongoose.Schema(
         message: 'Value must be "yes" or "no" ',
         required: true
       }
+    },
+    __v: {
+      type: Number,
+      select: false
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      select: false
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+      select: false
     }
   },
-  { timestamps: false, versionKey: false }
+  { timestamps: true }
 );
 
 PersonSchema.pre('save', async function pass(next) {

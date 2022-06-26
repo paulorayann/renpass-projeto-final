@@ -28,9 +28,23 @@ const ReserveSchema = new mongoose.Schema(
     },
     final_value: {
       type: Number
+    },
+    __v: {
+      type: Number,
+      select: false
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+      select: false
+    },
+    updatedAt: {
+      type: Date,
+      default: Date.now,
+      select: false
     }
   },
-  { timestamps: false, versionKey: false }
+  { timestamps: true }
 );
 
 ReserveSchema.plugin(mongoosePaginate);
