@@ -15,7 +15,7 @@ it('should create a new Person', async () => {
   expect(createPerson.statusCode).toBe(201);
 });
 
-it('should not be able to create a new Person with empty field on required properties', async () => {
+it('should not be able to create a new Person with empty required fields ', async () => {
   const createPerson = await request(app).post('/api/v1/person').send({
     name: '',
     cpf: chance.cpf(),

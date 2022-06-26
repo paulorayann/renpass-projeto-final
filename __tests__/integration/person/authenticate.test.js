@@ -18,7 +18,6 @@ it('should authenticate person', async () => {
     password: '123456789'
   });
   expect(authenticate.statusCode).toBe(200);
-  console.log(authenticate);
 });
 
 it('should return a token value for the authentication', async () => {
