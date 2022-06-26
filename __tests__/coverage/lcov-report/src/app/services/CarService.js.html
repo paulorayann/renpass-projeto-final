@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.18% </span>
+                <span class="strong">90.69% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>19/43</span>
+                <span class='fraction'>39/43</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">70% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>0/0</span>
+                <span class='fraction'>7/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">0% </span>
+                <span class="strong">83.33% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>0/6</span>
+                <span class='fraction'>5/6</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">44.18% </span>
+                <span class="strong">90.69% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>19/43</span>
+                <span class='fraction'>39/43</span>
             </div>
         
             
@@ -61,7 +61,7 @@
             </div>
         </template>
     </div>
-    <div class='status-line low'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -112,34 +112,34 @@
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">8x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-no">&nbsp;</span>
@@ -154,35 +154,35 @@ const NotFound = require('../errors/NotFound');
 const BadRequest = require('../errors/BadRequest');
 &nbsp;
 class CarService {
-  async create<span class="fstat-no" title="function not covered" >(payload) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await CarRepository.create(payload);</span>
-<span class="cstat-no" title="statement not covered" >    if (!result) throw new BadRequest(payload);</span>
-<span class="cstat-no" title="statement not covered" >    return result;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  async create(payload) {
+    const result = await CarRepository.create(payload);
+    if (!result) <span class="branch-0 cbranch-no" title="branch not covered" >throw n</span>ew BadRequest(payload);
+    return result;
+  }
 &nbsp;
-  async list<span class="fstat-no" title="function not covered" >(payload) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await CarRepository.list(payload);</span>
-<span class="cstat-no" title="statement not covered" >    if (!result) throw new NotFound(payload);</span>
-<span class="cstat-no" title="statement not covered" >    return result;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  async list(payload) {
+    const result = await CarRepository.list(payload);
+    if (!result) <span class="branch-0 cbranch-no" title="branch not covered" >throw n</span>ew NotFound(payload);
+    return result;
+  }
 &nbsp;
-  async getById<span class="fstat-no" title="function not covered" >(payload) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await CarRepository.getById(payload);</span>
-<span class="cstat-no" title="statement not covered" >    if (!result) throw new NotFound(payload);</span>
-<span class="cstat-no" title="statement not covered" >    return result;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  async getById(payload) {
+    const result = await CarRepository.getById(payload);
+    if (!result) throw new NotFound(payload);
+    return result;
+  }
 &nbsp;
-  async update<span class="fstat-no" title="function not covered" >(id, body) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await CarRepository.update(id, body);</span>
-<span class="cstat-no" title="statement not covered" >    if (!result) throw new NotFound(id, body);</span>
-<span class="cstat-no" title="statement not covered" >    return result;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  async update(id, body) {
+    const result = await CarRepository.update(id, body);
+    if (!result) <span class="branch-0 cbranch-no" title="branch not covered" >throw n</span>ew NotFound(id, body);
+    return result;
+  }
 &nbsp;
-  async delete<span class="fstat-no" title="function not covered" >(payload) {</span>
-<span class="cstat-no" title="statement not covered" >    const result = await CarRepository.delete(payload);</span>
-<span class="cstat-no" title="statement not covered" >    if (!result) throw new NotFound(payload);</span>
-<span class="cstat-no" title="statement not covered" >    return result;</span>
-<span class="cstat-no" title="statement not covered" >  }</span>
+  async delete(payload) {
+    const result = await CarRepository.delete(payload);
+    if (!result) throw new NotFound(payload);
+    return result;
+  }
 &nbsp;
   async updateCarAccessory<span class="fstat-no" title="function not covered" >(id, accessoryId, updatedAccessory) {</span>
 <span class="cstat-no" title="statement not covered" >    const result = await CarRepository.updateCarAccessory(id, accessoryId, updatedAccessory);</span>
@@ -199,7 +199,7 @@ module.exports = new CarService();
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Jun 26 2022 16:39:28 GMT-0300 (Horário Padrão de Brasília)
+                at Sun Jun 26 2022 18:27:35 GMT-0300 (Horário Padrão de Brasília)
             </div>
         <script src="../../../prettify.js"></script>
         <script>
