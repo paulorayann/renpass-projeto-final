@@ -1,8 +1,8 @@
 const axios = require('axios').default;
 
 class SearchCEP {
-  async getAddress(cep) {
-    const response = await axios.get(`https://viacep.com.br/ws/${cep}/json`);
+  async getAddress(zipCode) {
+    const response = await axios.get(`https://viacep.com.br/ws/${zipCode}/json`);
     return response.data;
   }
 }
