@@ -10,7 +10,7 @@ module.exports = async (req, res, next) => {
       name: Joi.string().trim().min(2),
       cnpj: Joi.string().regex(cnpjValid).trim(),
       activities: Joi.string().trim(),
-      cep: Joi.string().regex(cepValid),
+      zipCode: Joi.string().regex(cepValid),
       number: Joi.string().trim(),
       isFilial: Joi.boolean(),
       complement: Joi.string().trim(),

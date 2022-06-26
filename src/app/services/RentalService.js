@@ -9,8 +9,8 @@ class RentalService {
       const fields = payload.address;
       const addressField = fields[i];
       // eslint-disable-next-line no-await-in-loop
-      const { cep, logradouro, complemento, bairro, localidade, uf } = await SearchCEP.getAddress(addressField.cep);
-      addressField.cep = cep;
+      const { cep, logradouro, complemento, bairro, localidade, uf } = await SearchCEP.getAddress(addressField.zipCode);
+      addressField.zipCode = cep;
       addressField.street = logradouro;
       addressField.complement = complemento;
       addressField.district = bairro;

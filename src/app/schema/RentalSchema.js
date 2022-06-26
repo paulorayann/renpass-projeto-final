@@ -18,7 +18,7 @@ const RentalSchema = new mongoose.Schema(
     },
     address: [
       {
-        cep: {
+        zipCode: {
           type: String,
           required: true
         },

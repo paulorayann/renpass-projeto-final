@@ -23,10 +23,10 @@ module.exports = async (req, res, next) => {
       address: Joi.array()
         .items(
           Joi.object({
-            cep: Joi.string()
+            zipCode: Joi.string()
               .trim()
               .regex(cepValid)
-              .message('The CEP field has an invalid format, please try XXXXX-XXX and use numbers only')
+              .message('The zipCode field has an invalid format, please try XXXXX-XXX and use numbers only')
               .required(),
             number: Joi.string().trim().required(),
             isFilial: Joi.boolean().required()
