@@ -14,7 +14,7 @@ class FleetController {
   async list(req, res) {
     try {
       const result = await FleetService.list(req.query, req.params);
-      if (result.length === 0) {
+      if (result.fleet.length === 0) {
         return res.status(204).end();
       }
       return res.status(200).json(result);

@@ -30,7 +30,7 @@ class ReserveService {
     await ReserveUtils.sameDayCarReserve(payload.id_car, payload.data_start, payload.data_end);
 
     const dailyValue = await FleetRepository.list({ id_car });
-    const getDailyValue = dailyValue[0].daily_value;
+    const getDailyValue = dailyValue.fleet[0].daily_value;
 
     const { data_start, data_end } = payload;
 
@@ -82,7 +82,7 @@ class ReserveService {
 
     const { id_car } = payload;
     const dailyValue = await FleetRepository.list({ id_car });
-    const getDailyValue = dailyValue[0].daily_value;
+    const getDailyValue = dailyValue.fleet[0].daily_value;
 
     const { data_start, data_end } = payload;
 
