@@ -26,7 +26,7 @@ it('should create a new Rental', async () => {
         }
       ]
     });
-  console.log(createRental.body);
+
   expect(createRental.statusCode).toBe(201);
 });
 
