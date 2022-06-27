@@ -1,7 +1,7 @@
 <h1 align="center">Final Project - Renpass.UOL</h1>
 
 <h6 align="center">
-  Compasso.UOL entered in a new branch of the market, Renpass.UOL. A luxury and semi-luxury car rental segment. This REST API will be responsible for some endpoints of cars, person, rentals and authentication.
+  Compasso.UOL entered in a new branch of the market, Renpass.UOL. A luxury and semi-luxury car rental segment. This REST API will be responsible for some endpoints of cars, person, rentals,authentication, fleets of cars and reserves.
 </h6>
 <p align="center">
  <img src="https://img.shields.io/badge/JavaScript-323330?style=for-the-badge&logo=javascript&logoColor=F7DF1E"/>
@@ -15,8 +15,20 @@
 > Status: 👷‍♂️ (WIP)
 
 # Info about the project :books:
+...
+## Features
+  - ##### Pagination (Params: page and limit)
+  - ##### Unit Tests
+  - ##### Authentication
+  - ##### Person Endpoints
+  - ##### Car Endpoints
+  - ##### Rental Endpoints
+  - ##### Fleet Endpoints
+  - ##### Reserve Endpoints
 
-## Libs:
+   
+...
+## Dependencies:
 
 -   [express: v4.18.1](https://expressjs.com/pt-br/)
 -   [joi: v17.6.0](https://www.npmjs.com/package/joi)
@@ -29,7 +41,23 @@
 -   [jsonwebtoken": v8.5.1](https://www.npmjs.com/package/jsonwebtoken)
 -   [axios: v0.27.2](https://www.npmjs.com/package/axios)
 -   [swagger-ui-express: v4.4.0](https://www.npmjs.com/package/swagger-ui-express)
--
+
+...
+
+## DevDependencies:
+
+-   [chance: v1.1.8](https://www.npmjs.com/package/chance)
+-   [eslint: v8.2.0](https://www.npmjs.com/package/eslint)
+-   [eslint-config-airbnb-base: v15.0.0](https://www.npmjs.com/package/eslint-config-airbnb-base)
+-   [eslint-config-plugin: v1.0.11 ](https://www.npmjs.com/package/eslint-config-plugin)
+-   [eslint-config-prettier: v8.5.0](https://www.npmjs.com/package/eslint-config-prettier)
+-   [eslint-plugin-import: v2.25.2](eslint-plugin-import)
+-   [jest: v28.1.1](https://www.npmjs.com/package/jest)
+-   [nodemon: v2.0.16](https://www.npmjs.com/package/nodemon)
+-   [prettier: v2.6.2](https://www.npmjs.com/package/prettier)
+-   [supertest: v6.2.3](https://www.npmjs.com/package/supertest)
+  
+...
 
 ### Node Version:
 
@@ -77,32 +105,36 @@ You will need to create a .env in the project root directory.
 There is an .env.example you can freely use.
 
 ```
-DB_HOST = localhost
+DB_HOST =
 DB_USER =
 DB_PASS =
-DB_NAME = dbName_example
-DB_PORT = 3000
-DB_COLLECTION = collection_example
+DB_PORT =
+DB_COLLECTION =
+SECRET =
 ```
 
 ...
 
 #### Run the application
-
+...
+###### Development
 ```
-#development
 npm run dev
 ```
 ...
+###### Run the application in production
 
 ```
-#production
 npm start
 ```
+...
+#### Run the application Tests
+...
+###### Unit Tests
 
-<br>
-
-> #### You can use the [demo.md](demo.md) file in the project root directory to assist you in the population of Person, Car and Authorization.
+```
+npm run test
+```
 
 ...
 
@@ -141,7 +173,10 @@ http://localhost:3000/api/v1/person/
     "email": "email234@email.com",
     "password": "$2a$10$2t/vGjcqtpGtymnVvkWkZuzWwxb.1FXFQUBaBs5T5siL84NVZnSwi",
     "canDrive": "yes",
-    "_id": "629d69b18496122729f95787"
+    "_id": "629d69b18496122729f95787",
+    "createdAt": "2022-06-27T02:06:14.713Z",
+    "updatedAt": "2022-06-27T02:06:14.713Z",
+    "__v": 0
 }
 ```
 
@@ -347,7 +382,7 @@ http://localhost:3000/api/v1/authenticate
 
 ...
 
-`Status Code: 201 Created`
+`Status Code: 200 OK`
 
 ```
 {
@@ -428,7 +463,10 @@ http://localhost:3000/api/v1/car/
         }
     ],
     "passengersQtd": 4,
-    "_id": "629d6f808496122729f95797"
+    "_id": "629d6f808496122729f95797",
+    "createdAt": "2022-06-27T02:06:14.713Z",
+    "updatedAt": "2022-06-27T02:06:14.713Z",
+    "__v": 0
 }
 ```
 
@@ -677,7 +715,10 @@ http://localhost:3000/api/v1/rental/
       "state": "PA"
     }
   ],
-  "_id": "62a9ef6465026a1dd82e3fc6"
+  "_id": "62a9ef6465026a1dd82e3fc6",
+    "createdAt": "2022-06-27T02:06:14.713Z",
+    "updatedAt": "2022-06-27T02:06:14.713Z",
+    "__v": 0
 }
 ```
 
@@ -933,13 +974,16 @@ http://localhost:3000/api/v1/rental/:rentalId/fleet
     "status": "available",
     "daily_value": 500,
     "plate": "ARC2341",
-    "_id": "62b31d0bcf1fa3486fda7faa"
+    "_id": "62b31d0bcf1fa3486fda7faa",
+    "createdAt": "2022-06-27T02:06:14.713Z",
+    "updatedAt": "2022-06-27T02:06:14.713Z",
+    "__v": 0
 }
 ```
 
 ...
 
-`Status Code: 400 Bad Request`
+`Status Code: 404 Not Found`
 
 ```
 {
@@ -999,12 +1043,28 @@ http://localhost:3000/api/v1/rental/:rentalId/fleet/:id
 
 ```
 {
-    "_id": "62b290a1b1fef0fe1bfc8234",
-    "id_car": "62b0c1d0265111e89201d544",
-    "id_rental": "62b0c243265111e89201d568",
-    "status": "available",
-    "daily_value": 500,
-    "plate": "ABG5345"
+    "fleet": [
+        {
+            "_id": "62b686a900da412839d4c228",
+            "id_car": "62b0c1d0265111e89201d544",
+            "id_rental": "62b319d26d0f07aae85cc688",
+            "status": "available",
+            "daily_value": 500,
+            "plate": "aaa2341"
+        },
+        {
+            "_id": "62b71c2c8a413ef38327030f",
+            "id_car": "62b0c1d0265111e89201d544",
+            "id_rental": "62b612669c6550e13d2139cc",
+            "status": "rented",
+            "daily_value": 32,
+            "plate": "aab2341"
+        }
+    },
+    "total": 2,
+    "limit": 15,
+    "offsets": 1,
+    "offset": 1
 }
 
 ```
@@ -1124,7 +1184,10 @@ http://localhost:3000/api/v1/rental/:rentalId/reserve
     "id_car": "62b0c1d0265111e89201d544",
     "id_rental": "62b0c325ad47d9c8dccd46d7",
     "final_value": 1000,
-    "_id": "62b32175b216eb99d57340ed"
+    "_id": "62b32175b216eb99d57340ed",
+    "createdAt": "2022-06-27T02:06:14.713Z",
+    "updatedAt": "2022-06-27T02:06:14.713Z",
+    "__v": 0
 }
 
 ```
@@ -1137,9 +1200,11 @@ http://localhost:3000/api/v1/rental/:rentalId/reserve
 {
     "message": "The car is already booked, it was booked for the date 09/05/2022 to the date 11/05/2022"
 }
+```
 
-Or
+`Status Code: 404 Not Found`
 
+```
 {
     "message": "'User Id 62b0c216265111e89201d563' not found"
 }
@@ -1281,11 +1346,15 @@ http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
 
 `DELETE`
 
+`Status Code: 204 No Content`
+
 ```
 http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
 ```
 
-`Status Code: 204 No Content`
+
+
+...
 
 `Status Code: 404 Not Found`
 
@@ -1299,8 +1368,10 @@ http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
 
 ## Author
 
-### Paulo Rayann - [Github](https://github.com/paulorayann)
+| [<img src="https://avatars.githubusercontent.com/u/86445602?v=4" width=150><br><sub>Paulo Rayann</sub>](https://github.com/paulorayann) |       
+:-------------------------------------------------------------------------------------------------------------------------------------: 
 
+#### Paulo Rayann - [Github](https://github.com/paulorayann)
 ...
 
 ## License
@@ -1308,3 +1379,6 @@ http://localhost:3000/api/v1/rental/:rentalId/reserve/:id
 The [MIT License](https://opensource.org/licenses/MIT) (MIT)
 
 Copyright :copyright: 2022 - Renpass.UOL
+
+
+
