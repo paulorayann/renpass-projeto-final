@@ -33,7 +33,7 @@ it('should get person by Id', async () => {
   expect(listPerson.statusCode).toBe(200);
 });
 
-it('should not be able to get person by wrong id format', async () => {
+it('should not be able to get person by wrong id', async () => {
   await request(app).post('/api/v1/person').send({
     name: chance.name(),
     cpf: chance.cpf(),
